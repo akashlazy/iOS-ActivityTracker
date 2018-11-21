@@ -33,9 +33,6 @@ class ActivityCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         
-        backView.layer.cornerRadius = 24
-        backView.layer.masksToBounds = false
-        
         imgUser1.layer.cornerRadius = imgUser1.frame.height / 2
         imgUser1.layer.masksToBounds = false
         
