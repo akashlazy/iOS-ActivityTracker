@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		369E781C0AFAD0CB9EA04486 /* Pods_Tracker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 70DA9B8F398B2FD022B5A237 /* Pods_Tracker.framework */; };
 		38DA092187F05F39FE044C85 /* Pods_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1D1F2D11E2B8119CFBA1C4 /* Pods_TrackerTests.framework */; };
+		635668E921A5EA9900F7CD42 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635668E721A5EA9900F7CD42 /* CustomColor.swift */; };
+		635668EA21A5EA9900F7CD42 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635668E821A5EA9900F7CD42 /* UIColorExtension.swift */; };
 		8289D96B21A589AF00DA33BD /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8289D96A21A589AF00DA33BD /* CardView.swift */; };
 		82A3648E21A56D3E00788B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3648D21A56D3E00788B37 /* AppDelegate.swift */; };
 		82A3649521A56D4A00788B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A3649421A56D4A00788B37 /* Assets.xcassets */; };
@@ -44,6 +46,8 @@
 		1C1D1F2D11E2B8119CFBA1C4 /* Pods_TrackerTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrackerTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		39CBCF323AA3952C142D7473 /* Pods-Tracker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tracker.release.xcconfig"; path = "Target Support Files/Pods-Tracker/Pods-Tracker.release.xcconfig"; sourceTree = "<group>"; };
 		3ECCC984C472B2449F6ACD7B /* Pods-TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackerTests.release.xcconfig"; path = "Target Support Files/Pods-TrackerTests/Pods-TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
+		635668E721A5EA9900F7CD42 /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
+		635668E821A5EA9900F7CD42 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
 		70DA9B8F398B2FD022B5A237 /* Pods_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD19F56B68ABEA42516699 /* Pods-Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Tracker/Pods-Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		8289D96A21A589AF00DA33BD /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -118,6 +122,15 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		635668E621A5D65100F7CD42 /* Resource */ = {
+			isa = PBXGroup;
+			children = (
+				635668E721A5EA9900F7CD42 /* CustomColor.swift */,
+				635668E821A5EA9900F7CD42 /* UIColorExtension.swift */,
+			);
+			path = Resource;
+			sourceTree = "<group>";
+		};
 		82A3648121A56D3E00788B37 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +156,7 @@
 		82A3648C21A56D3E00788B37 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				635668E621A5D65100F7CD42 /* Resource */,
 				82A364C021A56EA600788B37 /* MainViewController.swift */,
 				82A364BF21A56EA600788B37 /* MainViewController.xib */,
 				82A364C321A56FBF00788B37 /* ActivityCell.swift */,
@@ -404,7 +418,9 @@
 				82A3648E21A56D3E00788B37 /* AppDelegate.swift in Sources */,
 				82A364C521A56FBF00788B37 /* ActivityCell.swift in Sources */,
 				8289D96B21A589AF00DA33BD /* CardView.swift in Sources */,
+				635668E921A5EA9900F7CD42 /* CustomColor.swift in Sources */,
 				82A364C221A56EA700788B37 /* MainViewController.swift in Sources */,
+				635668EA21A5EA9900F7CD42 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

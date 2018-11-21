@@ -20,6 +20,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        
+        self.title = "Activities"
+        
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        navigationItem.largeTitleDisplayMode = .automatic
+        navigationController?.navigationBar.barTintColor = UIColor.white
+        
+        let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addClick))
+//        let add = UIBarButtonItem(image: UIImage(named: "Add"), style: .done, target: self, action: #selector(addClick))
+        self.navigationItem.setRightBarButton(add, animated: true)
+    }
+    
+    
+    @objc func addClick() {
+        
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -50,17 +65,26 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            a -= 1
-//            arrStudentName.remove(at: indexPath.row)
-            tableView.beginUpdates()
-            tableView.deleteRows(at: [indexPath], with: .middle)
-            tableView.endUpdates()
-        }
-    }
+//
+//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+//        if editingStyle == .delete {
+//            a -= 1
+////            arrStudentName.remove(at: indexPath.row)
+//            tableView.beginUpdates()
+//            tableView.deleteRows(at: [indexPath], with: .middle)
+//            tableView.endUpdates()
+//        }
+//    }
 
+    
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
+        var cell: ActivityCell! = tableView.dequeueReusableCell(withIdentifier: "ActivityCell") as? ActivityCell
+        
+        UIView.animate(withDuration: 0.2, animations: {
+            cell.backView.frame = CGRect(x: 10, y: cell.backView.frame.origin.y, width: cell.backView.frame.width, height: cell.backView.frame.height)
+        }, completion: nil)
+    }
+    
     /*
     // MARK: - Navigation
 
