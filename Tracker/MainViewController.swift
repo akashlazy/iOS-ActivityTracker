@@ -21,6 +21,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
     }
+    
+    override func setEditing(_ editing: Bool, animated: Bool) {
+        super.setEditing(editing, animated: true)
+        
+        tableView.setEditing(editing, animated: true)
+    }
 
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
