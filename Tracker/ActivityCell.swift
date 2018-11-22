@@ -113,12 +113,26 @@ class ActivityCell: UITableViewCell {
         if !toogle {
             toogle = true
             sender.setImage(UIImage(named: "Timer_1"), for: .normal)
+            stop()
         } else {
             toogle = false
             sender.setImage(UIImage(named: "Timer_2"), for: .normal)
+            start()
+        }
+    }
+    
+    
+    private func start() {
+        Timer.every(1.seconds) {
+            print("Time")
         }
     }
 
+    private func stop() {
+        Timer().invalidate()
+    }
+
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 

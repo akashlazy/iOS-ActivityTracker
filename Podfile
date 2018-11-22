@@ -8,6 +8,7 @@ target 'Tracker' do
   
 # Pods for Tracker
     pod 'FMDB'
+    pod 'Schedule', '~> 1.0'
 
   target 'TrackerTests' do
     inherit! :search_paths

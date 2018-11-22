@@ -11,6 +11,13 @@
 		38DA092187F05F39FE044C85 /* Pods_TrackerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 1C1D1F2D11E2B8119CFBA1C4 /* Pods_TrackerTests.framework */; };
 		635668E921A5EA9900F7CD42 /* CustomColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635668E721A5EA9900F7CD42 /* CustomColor.swift */; };
 		635668EA21A5EA9900F7CD42 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 635668E821A5EA9900F7CD42 /* UIColorExtension.swift */; };
+		6392BE8521A5F61A00171302 /* SwiftyTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6392BE8421A5F61A00171302 /* SwiftyTimer.swift */; };
+		6392BE8921A5F97A00171302 /* DatabaseOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6392BE8721A5F97900171302 /* DatabaseOperation.swift */; };
+		6392BE8A21A5F97A00171302 /* DBInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6392BE8821A5F97900171302 /* DBInfo.swift */; };
+		6392BE8E21A6008900171302 /* Constant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6392BE8C21A6008900171302 /* Constant.swift */; };
+		6392BE8F21A6008900171302 /* MySharedPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6392BE8D21A6008900171302 /* MySharedPreference.swift */; };
+		6392BE9121A60CA200171302 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6392BE9021A60CA200171302 /* libsqlite3.0.tbd */; };
+		6392BE9321A60CD000171302 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6392BE9221A60CD000171302 /* libsqlite3.tbd */; };
 		8289D96B21A589AF00DA33BD /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8289D96A21A589AF00DA33BD /* CardView.swift */; };
 		82A3648E21A56D3E00788B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3648D21A56D3E00788B37 /* AppDelegate.swift */; };
 		82A3649521A56D4A00788B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A3649421A56D4A00788B37 /* Assets.xcassets */; };
@@ -48,6 +55,13 @@
 		3ECCC984C472B2449F6ACD7B /* Pods-TrackerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackerTests.release.xcconfig"; path = "Target Support Files/Pods-TrackerTests/Pods-TrackerTests.release.xcconfig"; sourceTree = "<group>"; };
 		635668E721A5EA9900F7CD42 /* CustomColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomColor.swift; sourceTree = "<group>"; };
 		635668E821A5EA9900F7CD42 /* UIColorExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIColorExtension.swift; sourceTree = "<group>"; };
+		6392BE8421A5F61A00171302 /* SwiftyTimer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwiftyTimer.swift; sourceTree = "<group>"; };
+		6392BE8721A5F97900171302 /* DatabaseOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatabaseOperation.swift; sourceTree = "<group>"; };
+		6392BE8821A5F97900171302 /* DBInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DBInfo.swift; sourceTree = "<group>"; };
+		6392BE8C21A6008900171302 /* Constant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constant.swift; sourceTree = "<group>"; };
+		6392BE8D21A6008900171302 /* MySharedPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySharedPreference.swift; sourceTree = "<group>"; };
+		6392BE9021A60CA200171302 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		6392BE9221A60CD000171302 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		70DA9B8F398B2FD022B5A237 /* Pods_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD19F56B68ABEA42516699 /* Pods-Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Tracker/Pods-Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		8289D96A21A589AF00DA33BD /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -76,6 +90,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6392BE9321A60CD000171302 /* libsqlite3.tbd in Frameworks */,
+				6392BE9121A60CA200171302 /* libsqlite3.0.tbd in Frameworks */,
 				369E781C0AFAD0CB9EA04486 /* Pods_Tracker.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -102,6 +118,8 @@
 		0FE13135488E0E27B56ACCDA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6392BE9221A60CD000171302 /* libsqlite3.tbd */,
+				6392BE9021A60CA200171302 /* libsqlite3.0.tbd */,
 				70DA9B8F398B2FD022B5A237 /* Pods_Tracker.framework */,
 				1C1D1F2D11E2B8119CFBA1C4 /* Pods_TrackerTests.framework */,
 				E134A339872E03F6A63D2B0A /* Pods_TrackerUITests.framework */,
@@ -125,10 +143,30 @@
 		635668E621A5D65100F7CD42 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				6392BE8B21A6007A00171302 /* Constant */,
+				6392BE8421A5F61A00171302 /* SwiftyTimer.swift */,
 				635668E721A5EA9900F7CD42 /* CustomColor.swift */,
 				635668E821A5EA9900F7CD42 /* UIColorExtension.swift */,
 			);
 			path = Resource;
+			sourceTree = "<group>";
+		};
+		6392BE8621A5F97900171302 /* Database */ = {
+			isa = PBXGroup;
+			children = (
+				6392BE8721A5F97900171302 /* DatabaseOperation.swift */,
+				6392BE8821A5F97900171302 /* DBInfo.swift */,
+			);
+			path = Database;
+			sourceTree = "<group>";
+		};
+		6392BE8B21A6007A00171302 /* Constant */ = {
+			isa = PBXGroup;
+			children = (
+				6392BE8C21A6008900171302 /* Constant.swift */,
+				6392BE8D21A6008900171302 /* MySharedPreference.swift */,
+			);
+			path = Constant;
 			sourceTree = "<group>";
 		};
 		82A3648121A56D3E00788B37 = {
@@ -156,6 +194,7 @@
 		82A3648C21A56D3E00788B37 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				6392BE8621A5F97900171302 /* Database */,
 				635668E621A5D65100F7CD42 /* Resource */,
 				82A364C021A56EA600788B37 /* MainViewController.swift */,
 				82A364BF21A56EA600788B37 /* MainViewController.xib */,
@@ -415,10 +454,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6392BE8921A5F97A00171302 /* DatabaseOperation.swift in Sources */,
 				82A3648E21A56D3E00788B37 /* AppDelegate.swift in Sources */,
+				6392BE8F21A6008900171302 /* MySharedPreference.swift in Sources */,
 				82A364C521A56FBF00788B37 /* ActivityCell.swift in Sources */,
 				8289D96B21A589AF00DA33BD /* CardView.swift in Sources */,
+				6392BE8521A5F61A00171302 /* SwiftyTimer.swift in Sources */,
 				635668E921A5EA9900F7CD42 /* CustomColor.swift in Sources */,
+				6392BE8A21A5F97A00171302 /* DBInfo.swift in Sources */,
+				6392BE8E21A6008900171302 /* Constant.swift in Sources */,
 				82A364C221A56EA700788B37 /* MainViewController.swift in Sources */,
 				635668EA21A5EA9900F7CD42 /* UIColorExtension.swift in Sources */,
 			);
