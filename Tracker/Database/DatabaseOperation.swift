@@ -7,8 +7,8 @@
 //
 
 import Foundation
-import FMDB
 import SQLite3
+import FMDB
 
 class DatabaseOperation: DBInfo {
     
@@ -115,38 +115,40 @@ class DatabaseOperation: DBInfo {
     /////////// end UsersList
     
     ///////////ActivityMaster
-    func InsertActiviryMasterList(_ description: String, category: String, image: String, createDate: String, updateDate: String, createby: String, updateby: String) {
+    func InsertActiviryMasterList(_ description: String, title: String, image: String, createDate: String, dueDate: String, startTime: String, lastUpdated: String, isActivityStop: String) {
         
         let parameter = NSMutableDictionary()
         parameter.setValue(dbActivityDescription, forKey: "1")
-        parameter.setValue(dbCategoryName, forKey: "2")
+        parameter.setValue(dbActivityTitle, forKey: "2")
         parameter.setValue(dbImageName, forKey: "3")
         parameter.setValue(dbCreateDate, forKey: "4")
-        parameter.setValue(dbUpdatedDate, forKey: "5")
-        parameter.setValue(dbCreatedby, forKey: "6")
-        parameter.setValue(dbUpdatedby, forKey: "7")
+        parameter.setValue(dueDate, forKey: "5")
+        parameter.setValue(startTime, forKey: "6")
+        parameter.setValue(lastUpdated, forKey: "7")
+        parameter.setValue(isActivityStop, forKey: "8")
         
         let values = NSMutableDictionary()
         values.setValue(description, forKey: "1")
-        values.setValue(category, forKey: "2")
+        values.setValue(title, forKey: "2")
         values.setValue(image, forKey: "3")
         values.setValue(createDate, forKey: "4")
-        values.setValue(updateDate, forKey: "5")
-        values.setValue(createby, forKey: "6")
-        values.setValue(updateby, forKey: "7")
+        values.setValue(dueDate, forKey: "5")
+        values.setValue(startTime, forKey: "6")
+        values.setValue(lastUpdated, forKey: "7")
+        values.setValue(isActivityStop, forKey: "8")
         
         insertExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values)
     }
-    func UpdateActivityMasterList(_ ID: String, description: String, category: String, image: String) {
+    func UpdateActivityMasterList(_ ID: String, description: String, title: String, image: String) {
         
         let parameter = NSMutableDictionary()
         parameter.setValue(dbActivityDescription, forKey: "1")
-        parameter.setValue(dbCategoryName, forKey: "2")
+        parameter.setValue(dbActivityTitle, forKey: "2")
         parameter.setValue(dbImageName, forKey: "3")
         
         let values = NSMutableDictionary()
         values.setValue(description, forKey: "1")
-        values.setValue(category, forKey: "2")
+        values.setValue(title, forKey: "2")
         values.setValue(image, forKey: "3")
         
         updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " ='" + ID)

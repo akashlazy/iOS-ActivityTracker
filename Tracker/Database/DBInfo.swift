@@ -44,17 +44,21 @@ class DBInfo {
     
     ///////ActivityMaster Table
     let ActivityMaster_Tlb = "ActivityMasterTable"
-    let dbActivityDescription = "ActivityDescription"
-    let dbCategoryName = "UserName"
+    let dbActivityDescription = "Description"
+    let dbActivityTitle = "Title"
+    let dbDueDate = "DueDate"
+    let dbStartTime = "StartTime"
+    let dbLastUpdate = "LastUpdate"
+    let dbIsActivityStop = "IsActivityStop"
     
     func ActivityListTableCreate(_ db: FMDatabase) {
         //prepare table creations query
         let ActivityListTableCreate = "create table "
             + ActivityMaster_Tlb + " (" + dbID + " integer primary key autoincrement, "
-            + dbActivityDescription + " text, " + dbCategoryName + " text, "
-            + dbImageName + " text, " + dbCreateDate + " text, "
-            + dbUpdatedDate + " text, " + dbCreatedby + " text, "
-            + dbUpdatedby + " text " + " ); "
+            + dbActivityDescription + " text, " + dbActivityTitle + " text, "
+            + dbImageName + " text, " + dbLastUpdate + " text, "
+            + dbDueDate + " text, " + dbStartTime + " text, "
+            + dbIsActivityStop + " text " + " ); "
         
         sqlExecute(ActivityListTableCreate)
     }
@@ -108,7 +112,6 @@ class DBInfo {
     
     ///////ActivityLog Table
     let ActivityLog_Tlb = "ActivityLog"
-    let dbStartTime = "StartTime"
     let dbEndTime = "EndTime"
     
     func ActivityLogListTableCreate(_ db: FMDatabase) {
