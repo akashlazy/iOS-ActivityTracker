@@ -18,16 +18,26 @@
 		6392BE8F21A6008900171302 /* MySharedPreference.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6392BE8D21A6008900171302 /* MySharedPreference.swift */; };
 		6392BE9121A60CA200171302 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6392BE9021A60CA200171302 /* libsqlite3.0.tbd */; };
 		6392BE9321A60CD000171302 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 6392BE9221A60CD000171302 /* libsqlite3.tbd */; };
+		63AD88E921A7EA3200A31F0D /* ChecklistVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD88DA21A7EA3200A31F0D /* ChecklistVC.swift */; };
+		63AD88EA21A7EA3200A31F0D /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD88DB21A7EA3200A31F0D /* TaskCell.swift */; };
+		63AD88EB21A7EA3200A31F0D /* ChecklistVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63AD88DC21A7EA3200A31F0D /* ChecklistVC.xib */; };
+		63AD88EC21A7EA3200A31F0D /* TaskCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63AD88DD21A7EA3200A31F0D /* TaskCell.xib */; };
+		63AD88ED21A7EA3200A31F0D /* AddActivityVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD88DF21A7EA3200A31F0D /* AddActivityVC.swift */; };
+		63AD88EE21A7EA3200A31F0D /* AddActivityVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63AD88E021A7EA3200A31F0D /* AddActivityVC.xib */; };
+		63AD88EF21A7EA3200A31F0D /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63AD88E221A7EA3200A31F0D /* ActivityCell.xib */; };
+		63AD88F021A7EA3200A31F0D /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD88E321A7EA3200A31F0D /* ActivityCell.swift */; };
+		63AD88F121A7EA3200A31F0D /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63AD88E421A7EA3200A31F0D /* MainViewController.xib */; };
+		63AD88F221A7EA3200A31F0D /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD88E521A7EA3200A31F0D /* MainViewController.swift */; };
+		63AD88F321A7EA3200A31F0D /* AddTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD88E721A7EA3200A31F0D /* AddTaskVC.swift */; };
+		63AD88F421A7EA3200A31F0D /* AddTaskVC.xib in Resources */ = {isa = PBXBuildFile; fileRef = 63AD88E821A7EA3200A31F0D /* AddTaskVC.xib */; };
+		63AD88F721A7EA4D00A31F0D /* Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD88F521A7EA4D00A31F0D /* Extension.swift */; };
+		63AD88F821A7EA4D00A31F0D /* Icon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD88F621A7EA4D00A31F0D /* Icon.swift */; };
 		8289D96B21A589AF00DA33BD /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8289D96A21A589AF00DA33BD /* CardView.swift */; };
 		82A3648E21A56D3E00788B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3648D21A56D3E00788B37 /* AppDelegate.swift */; };
 		82A3649521A56D4A00788B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A3649421A56D4A00788B37 /* Assets.xcassets */; };
 		82A3649821A56D4A00788B37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A3649621A56D4A00788B37 /* LaunchScreen.storyboard */; };
 		82A364A321A56D4A00788B37 /* TrackerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A364A221A56D4A00788B37 /* TrackerTests.swift */; };
 		82A364AE21A56D4A00788B37 /* TrackerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A364AD21A56D4A00788B37 /* TrackerUITests.swift */; };
-		82A364C121A56EA700788B37 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A364BF21A56EA600788B37 /* MainViewController.xib */; };
-		82A364C221A56EA700788B37 /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A364C021A56EA600788B37 /* MainViewController.swift */; };
-		82A364C521A56FBF00788B37 /* ActivityCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A364C321A56FBF00788B37 /* ActivityCell.swift */; };
-		82A364C621A56FBF00788B37 /* ActivityCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 82A364C421A56FBF00788B37 /* ActivityCell.xib */; };
 		E65E73E3BD3CA7A5BC657FBE /* Pods_TrackerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E134A339872E03F6A63D2B0A /* Pods_TrackerUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -62,6 +72,20 @@
 		6392BE8D21A6008900171302 /* MySharedPreference.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySharedPreference.swift; sourceTree = "<group>"; };
 		6392BE9021A60CA200171302 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		6392BE9221A60CD000171302 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		63AD88DA21A7EA3200A31F0D /* ChecklistVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChecklistVC.swift; sourceTree = "<group>"; };
+		63AD88DB21A7EA3200A31F0D /* TaskCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		63AD88DC21A7EA3200A31F0D /* ChecklistVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ChecklistVC.xib; sourceTree = "<group>"; };
+		63AD88DD21A7EA3200A31F0D /* TaskCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TaskCell.xib; sourceTree = "<group>"; };
+		63AD88DF21A7EA3200A31F0D /* AddActivityVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddActivityVC.swift; sourceTree = "<group>"; };
+		63AD88E021A7EA3200A31F0D /* AddActivityVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddActivityVC.xib; sourceTree = "<group>"; };
+		63AD88E221A7EA3200A31F0D /* ActivityCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
+		63AD88E321A7EA3200A31F0D /* ActivityCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
+		63AD88E421A7EA3200A31F0D /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		63AD88E521A7EA3200A31F0D /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
+		63AD88E721A7EA3200A31F0D /* AddTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddTaskVC.swift; sourceTree = "<group>"; };
+		63AD88E821A7EA3200A31F0D /* AddTaskVC.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddTaskVC.xib; sourceTree = "<group>"; };
+		63AD88F521A7EA4D00A31F0D /* Extension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extension.swift; sourceTree = "<group>"; };
+		63AD88F621A7EA4D00A31F0D /* Icon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Icon.swift; sourceTree = "<group>"; };
 		70DA9B8F398B2FD022B5A237 /* Pods_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD19F56B68ABEA42516699 /* Pods-Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Tracker/Pods-Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		8289D96A21A589AF00DA33BD /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
@@ -76,10 +100,6 @@
 		82A364A921A56D4A00788B37 /* TrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A364AD21A56D4A00788B37 /* TrackerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrackerUITests.swift; sourceTree = "<group>"; };
 		82A364AF21A56D4A00788B37 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		82A364BF21A56EA600788B37 /* MainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
-		82A364C021A56EA600788B37 /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
-		82A364C321A56FBF00788B37 /* ActivityCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCell.swift; sourceTree = "<group>"; };
-		82A364C421A56FBF00788B37 /* ActivityCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ActivityCell.xib; sourceTree = "<group>"; };
 		D67B56AC8E1D5DB5AB69381F /* Pods-TrackerUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackerUITests.debug.xcconfig"; path = "Target Support Files/Pods-TrackerUITests/Pods-TrackerUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		E134A339872E03F6A63D2B0A /* Pods_TrackerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_TrackerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E85EC7B0CD7E8700F559A1FF /* Pods-TrackerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-TrackerTests.debug.xcconfig"; path = "Target Support Files/Pods-TrackerTests/Pods-TrackerTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -145,6 +165,8 @@
 			children = (
 				6392BE8B21A6007A00171302 /* Constant */,
 				6392BE8421A5F61A00171302 /* SwiftyTimer.swift */,
+				63AD88F521A7EA4D00A31F0D /* Extension.swift */,
+				63AD88F621A7EA4D00A31F0D /* Icon.swift */,
 				635668E721A5EA9900F7CD42 /* CustomColor.swift */,
 				635668E821A5EA9900F7CD42 /* UIColorExtension.swift */,
 			);
@@ -167,6 +189,57 @@
 				6392BE8D21A6008900171302 /* MySharedPreference.swift */,
 			);
 			path = Constant;
+			sourceTree = "<group>";
+		};
+		63AD88D821A7EA3200A31F0D /* Activities */ = {
+			isa = PBXGroup;
+			children = (
+				63AD88D921A7EA3200A31F0D /* Checklist */,
+				63AD88DE21A7EA3200A31F0D /* AddActivity */,
+				63AD88E121A7EA3200A31F0D /* Dashboard */,
+				63AD88E621A7EA3200A31F0D /* AddTask */,
+			);
+			path = Activities;
+			sourceTree = "<group>";
+		};
+		63AD88D921A7EA3200A31F0D /* Checklist */ = {
+			isa = PBXGroup;
+			children = (
+				63AD88DA21A7EA3200A31F0D /* ChecklistVC.swift */,
+				63AD88DB21A7EA3200A31F0D /* TaskCell.swift */,
+				63AD88DC21A7EA3200A31F0D /* ChecklistVC.xib */,
+				63AD88DD21A7EA3200A31F0D /* TaskCell.xib */,
+			);
+			path = Checklist;
+			sourceTree = "<group>";
+		};
+		63AD88DE21A7EA3200A31F0D /* AddActivity */ = {
+			isa = PBXGroup;
+			children = (
+				63AD88DF21A7EA3200A31F0D /* AddActivityVC.swift */,
+				63AD88E021A7EA3200A31F0D /* AddActivityVC.xib */,
+			);
+			path = AddActivity;
+			sourceTree = "<group>";
+		};
+		63AD88E121A7EA3200A31F0D /* Dashboard */ = {
+			isa = PBXGroup;
+			children = (
+				63AD88E221A7EA3200A31F0D /* ActivityCell.xib */,
+				63AD88E321A7EA3200A31F0D /* ActivityCell.swift */,
+				63AD88E421A7EA3200A31F0D /* MainViewController.xib */,
+				63AD88E521A7EA3200A31F0D /* MainViewController.swift */,
+			);
+			path = Dashboard;
+			sourceTree = "<group>";
+		};
+		63AD88E621A7EA3200A31F0D /* AddTask */ = {
+			isa = PBXGroup;
+			children = (
+				63AD88E721A7EA3200A31F0D /* AddTaskVC.swift */,
+				63AD88E821A7EA3200A31F0D /* AddTaskVC.xib */,
+			);
+			path = AddTask;
 			sourceTree = "<group>";
 		};
 		82A3648121A56D3E00788B37 = {
@@ -194,12 +267,9 @@
 		82A3648C21A56D3E00788B37 /* Tracker */ = {
 			isa = PBXGroup;
 			children = (
+				63AD88D821A7EA3200A31F0D /* Activities */,
 				6392BE8621A5F97900171302 /* Database */,
 				635668E621A5D65100F7CD42 /* Resource */,
-				82A364C021A56EA600788B37 /* MainViewController.swift */,
-				82A364BF21A56EA600788B37 /* MainViewController.xib */,
-				82A364C321A56FBF00788B37 /* ActivityCell.swift */,
-				82A364C421A56FBF00788B37 /* ActivityCell.xib */,
 				82A3648D21A56D3E00788B37 /* AppDelegate.swift */,
 				82A3649421A56D4A00788B37 /* Assets.xcassets */,
 				82A3649621A56D4A00788B37 /* LaunchScreen.storyboard */,
@@ -335,10 +405,14 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				63AD88EE21A7EA3200A31F0D /* AddActivityVC.xib in Resources */,
+				63AD88EC21A7EA3200A31F0D /* TaskCell.xib in Resources */,
 				82A3649821A56D4A00788B37 /* LaunchScreen.storyboard in Resources */,
-				82A364C121A56EA700788B37 /* MainViewController.xib in Resources */,
-				82A364C621A56FBF00788B37 /* ActivityCell.xib in Resources */,
+				63AD88F421A7EA3200A31F0D /* AddTaskVC.xib in Resources */,
 				82A3649521A56D4A00788B37 /* Assets.xcassets in Resources */,
+				63AD88EF21A7EA3200A31F0D /* ActivityCell.xib in Resources */,
+				63AD88F121A7EA3200A31F0D /* MainViewController.xib in Resources */,
+				63AD88EB21A7EA3200A31F0D /* ChecklistVC.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -455,15 +529,21 @@
 			buildActionMask = 2147483647;
 			files = (
 				6392BE8921A5F97A00171302 /* DatabaseOperation.swift in Sources */,
+				63AD88F821A7EA4D00A31F0D /* Icon.swift in Sources */,
 				82A3648E21A56D3E00788B37 /* AppDelegate.swift in Sources */,
 				6392BE8F21A6008900171302 /* MySharedPreference.swift in Sources */,
-				82A364C521A56FBF00788B37 /* ActivityCell.swift in Sources */,
+				63AD88E921A7EA3200A31F0D /* ChecklistVC.swift in Sources */,
 				8289D96B21A589AF00DA33BD /* CardView.swift in Sources */,
 				6392BE8521A5F61A00171302 /* SwiftyTimer.swift in Sources */,
 				635668E921A5EA9900F7CD42 /* CustomColor.swift in Sources */,
+				63AD88F721A7EA4D00A31F0D /* Extension.swift in Sources */,
+				63AD88F321A7EA3200A31F0D /* AddTaskVC.swift in Sources */,
+				63AD88F221A7EA3200A31F0D /* MainViewController.swift in Sources */,
+				63AD88F021A7EA3200A31F0D /* ActivityCell.swift in Sources */,
+				63AD88EA21A7EA3200A31F0D /* TaskCell.swift in Sources */,
 				6392BE8A21A5F97A00171302 /* DBInfo.swift in Sources */,
+				63AD88ED21A7EA3200A31F0D /* AddActivityVC.swift in Sources */,
 				6392BE8E21A6008900171302 /* Constant.swift in Sources */,
-				82A364C221A56EA700788B37 /* MainViewController.swift in Sources */,
 				635668EA21A5EA9900F7CD42 /* UIColorExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
