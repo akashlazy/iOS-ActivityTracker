@@ -31,7 +31,8 @@ class DBInfo {
             + dbUserID + " integer, " + dbUserName + " text, "
             + dbImageName + " text, " + dbCreateDate + " text, "
             + dbUpdatedDate + " text, " + dbCreatedby + " text, "
-            + dbUpdatedby + " text " + " ); "
+            + dbUpdatedby + " text, " + dbCreatedby
+            + " text " + " ); "
         
         sqlExecute(UsersListTableCreate)
     }
@@ -56,9 +57,10 @@ class DBInfo {
         let ActivityListTableCreate = "create table "
             + ActivityMaster_Tlb + " (" + dbID + " integer primary key autoincrement, "
             + dbActivityDescription + " text, " + dbActivityTitle + " text, "
-            + dbImageName + " text, " + dbLastUpdate + " text, "
-            + dbDueDate + " text, " + dbStartTime + " text, "
-            + dbIsActivityStop + " text " + " ); "
+            + dbImageName + " text, " + dbCreateDate + " text, "
+            + dbLastUpdate + " text, " + dbDueDate + " text, "
+            + dbStartTime + " text, " + dbIsActivityStop
+            + " text " + " ); "
         
         sqlExecute(ActivityListTableCreate)
     }
@@ -147,6 +149,8 @@ class DBInfo {
             return nil
         }
     }
+    
+    
     
     func insertExecuteBind(_ tableName: String, parameter: NSMutableDictionary, value: NSMutableDictionary) {
         

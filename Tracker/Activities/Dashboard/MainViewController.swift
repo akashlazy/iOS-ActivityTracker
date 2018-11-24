@@ -14,9 +14,21 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var hideView: UIView!
     @IBOutlet weak var hideLabel: UILabel!
     
+    private var arrActivity = [ArrActivity]()
     
-    var a = 5
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
+            self.refreshList()
+        })
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -24,7 +36,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         tableView.delegate = self
         tableView.dataSource = self
         
-        self.title = "Activities"
+        self.title = "strActivities".localized
         
         self.view.backgroundColor = CustomColor.background()
         
@@ -44,15 +56,15 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
         let nav = UINavigationController(rootViewController: addActivity)
         
-        self.present(nav, animated: true, completion: {
-            self.a -= 1
-            self.refreshList()
-        })
-
+        self.present(nav, animated: true, completion: nil)
     }
     
     func refreshList() {
-        if a == 0 {
+        
+        arrActivity = [ArrActivity]()
+        arrActivity = ArrActivity.sharedInstance.getAllActivity()
+        
+        if arrActivity.isEmpty {
             tableView.isHidden = true
             hideView.isHidden = false
         } else {
@@ -62,18 +74,12 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         }
     }
     
-    override func setEditing(_ editing: Bool, animated: Bool) {
-        super.setEditing(editing, animated: true)
-        
-        tableView.setEditing(editing, animated: true)
-    }
-
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return a
+        return arrActivity.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -84,32 +90,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell") as? ActivityCell
         }
         
+        cell.configureCell(arrActivity, index: indexPath.row)
+        
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let checklistVC = ChecklistVC(nibName: "ChecklistVC", bundle: nil)
+        
+        checklistVC.activityID = arrActivity[indexPath.row].id
+        
         self.navigationController?.pushViewController(checklistVC, animated: true)
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         return true
     }
-    
-
-//
-//    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-//        if editingStyle == .delete {
-//            a -= 1
-////            arrStudentName.remove(at: indexPath.row)
-//            tableView.beginUpdates()
-//            tableView.deleteRows(at: [indexPath], with: .middle)
-//            tableView.endUpdates()
-//        }
-//    }
-
-    
-    
     
     /*
     // MARK: - Navigation
@@ -125,7 +121,5 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 
 extension MainViewController {
-    func createUsers()  {
-        
-    }
+    
 }

@@ -137,6 +137,21 @@ class ActivityCell: UITableViewCell {
         Timer().invalidate()
     }
 
+    func configureCell(_ arr: [ArrActivity], index: Int) {
+        
+        let activity = arr[index]
+        
+        self.txtTitle.text = activity.title
+        self.txtSubTitle.text = activity.description
+        
+        if activity.imageName.isEmpty {
+            
+        } else {
+            self.imgIcon.image = UIImage(named: "")
+        }
+        
+      
+    }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)

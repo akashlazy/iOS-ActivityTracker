@@ -11,6 +11,7 @@ import Foundation
 class ArrTasks {
     static let sharedInstance = ArrTasks()
     
+    public var id = ""
     public var name = ""
     public var status = ""
     public var activityID = ""
@@ -33,30 +34,28 @@ class ArrTasks {
     /// - Parameter activityID: activityID
     /// - Returns: array of tasks
     func getAllTasks(_ activityID: String) -> [ArrTasks] {
-        
-        var task = ArrTasks()
+       
         var arr = [ArrTasks]()
-        
-        task.name = "Add Task"
-        arr.append(task)
         
         let db = DatabaseOperation()
         db.openDatabase(false)
         
-        let sql = "SELECT " + db.dbTaskName + "," + db.dbTaskStatus
+        let sql = "SELECT " + db.dbID + "," + db.dbTaskName
+            + "," + db.dbTaskStatus
             + " from " + db.ActivityTaskTransaction_Tlb
             + " where " + db.dbActivityMasterID + " = " + activityID
+            + " OR " + db.dbActivityMasterID + " = 0 "
+//            + "order by " + db.dbID
         
         guard let cursor = db.selectRecords(sql) else {
             return arr
         }
         
-        
-        
         while cursor.next() {
-            task = ArrTasks()
-            task.name = cursor.stringValue(0)
-            task.status = cursor.stringValue(1)
+            let task = ArrTasks()
+            task.id = cursor.stringValue(0)
+            task.name = cursor.stringValue(1)
+            task.status = cursor.stringValue(2)
             
             arr.append(task)
         }
@@ -65,5 +64,15 @@ class ArrTasks {
         db.closeDatabase()
         
         return arr
+    }
+    
+    func deleteTask(_ ID: String) {
+        
+        let db = DatabaseOperation()
+        db.openDatabase(true)
+        
+        db.DeleteActivityTaskList(ID)
+        
+        db.closeDatabase()
     }
 }
