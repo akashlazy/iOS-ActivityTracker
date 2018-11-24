@@ -54,6 +54,30 @@ class DatabaseOperation: DBInfo {
         ActivityTaskListTableCreate(database)
         ActivityLogListTableCreate(database)
         
+        InsertActiviryMasterList("iOS Developer", title: "Apple", image: "", dueDate: "")
+        InsertActiviryMasterList("Android Developer", title: "Google", image: "", dueDate: "")
+        InsertActiviryMasterList("Windows Developer", title: "Microsoft", image: "", dueDate: "")
+        
+        InsertActivityTaskList("Add Task", status: "0", activityMasterID: "0")
+        InsertActivityTaskList("Design", status: "1", activityMasterID: "1")
+        InsertActivityTaskList("Coding", status: "0", activityMasterID: "1")
+        InsertActivityTaskList("Testing", status: "0", activityMasterID: "2")
+        InsertActivityTaskList("Publish", status: "1", activityMasterID: "3")
+        
+        
+        InsertUsersList("", userID: "", image: "Add")
+        InsertUsersList("Akash", userID: "1", image: "")
+        InsertUsersList("Ashish", userID: "2", image: "")
+        InsertUsersList("Kunal", userID: "3", image: "")
+        
+        
+        InsertActivityParticipentList("1", activityMasterID: "1")
+        InsertActivityParticipentList("2", activityMasterID: "1")
+        InsertActivityParticipentList("3", activityMasterID: "2")
+        InsertActivityParticipentList("1", activityMasterID: "2")
+        InsertActivityParticipentList("1", activityMasterID: "3")
+        
+        
         let appPref = MySharedPreference()
         appPref.setISDBOperationCreated(true)
     }
@@ -67,7 +91,7 @@ class DatabaseOperation: DBInfo {
     }
     
     /////////////////UsersList
-    func InsertUsersList(_ name: String, userID: String,  image: String, createDate: String, updateDate: String, createby: String, updateby: String) {
+    func InsertUsersList(_ name: String, userID: String,  image: String) {
         
         let parameter = NSMutableDictionary()
         parameter.setValue(dbUserName, forKey: "1")
@@ -82,10 +106,10 @@ class DatabaseOperation: DBInfo {
         values.setValue(name, forKey: "1")
         values.setValue(userID, forKey: "2")
         values.setValue(image, forKey: "3")
-        values.setValue(createDate, forKey: "4")
-        values.setValue(updateDate, forKey: "5")
-        values.setValue(createby, forKey: "6")
-        values.setValue(updateby, forKey: "7")
+        values.setValue("", forKey: "4")
+        values.setValue("", forKey: "5")
+        values.setValue("", forKey: "6")
+        values.setValue("", forKey: "7")
         
         insertExecuteBind(Users_Tlb, parameter: parameter, value: values)
     }
@@ -117,27 +141,27 @@ class DatabaseOperation: DBInfo {
     /////////// end UsersList
     
     ///////////ActivityMaster
-    func InsertActiviryMasterList(_ description: String, title: String, image: String, createDate: String, dueDate: String, startTime: String, lastUpdated: String, isActivityStop: String) {
+    func InsertActiviryMasterList(_ description: String, title: String, image: String, dueDate: String) {
         
         let parameter = NSMutableDictionary()
         parameter.setValue(dbActivityDescription, forKey: "1")
         parameter.setValue(dbActivityTitle, forKey: "2")
         parameter.setValue(dbImageName, forKey: "3")
         parameter.setValue(dbCreateDate, forKey: "4")
-        parameter.setValue(dueDate, forKey: "5")
-        parameter.setValue(startTime, forKey: "6")
-        parameter.setValue(lastUpdated, forKey: "7")
-        parameter.setValue(isActivityStop, forKey: "8")
+        parameter.setValue(dbDueDate, forKey: "5")
+        parameter.setValue(dbStartTime, forKey: "6")
+        parameter.setValue(dbLastUpdate, forKey: "7")
+        parameter.setValue(dbIsActivityStop, forKey: "8")
         
         let values = NSMutableDictionary()
         values.setValue(description, forKey: "1")
         values.setValue(title, forKey: "2")
         values.setValue(image, forKey: "3")
-        values.setValue(createDate, forKey: "4")
+        values.setValue("", forKey: "4")
         values.setValue(dueDate, forKey: "5")
-        values.setValue(startTime, forKey: "6")
-        values.setValue(lastUpdated, forKey: "7")
-        values.setValue(isActivityStop, forKey: "8")
+        values.setValue("", forKey: "6")
+        values.setValue("", forKey: "7")
+        values.setValue("0", forKey: "8")
         
         insertExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values)
     }

@@ -18,6 +18,8 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     
     private var arrTasks = [ArrTasks]()
     
+    var activityID = ""
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
@@ -36,7 +38,9 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     private func refreshView() {
-        arrTasks = ArrTasks.sharedInstance.getAllTasks("1")
+        arrTasks = [ArrTasks]()
+        arrTasks = ArrTasks.sharedInstance.getAllTasks(activityID)
+       
         tableView.reloadData()
     }
     
@@ -80,17 +84,22 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        return true
+        if indexPath.row == arrTasks.count - 1 {
+            return false
+        } else {
+            return true
+        }
     }
     
-        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
-            if editingStyle == .delete {
-                arrTasks.remove(at: indexPath.row)
-                tableView.beginUpdates()
-                tableView.deleteRows(at: [indexPath], with: .middle)
-                tableView.endUpdates()
-            }
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            ArrTasks.sharedInstance.deleteTask(arrTasks[indexPath.row].id)
+            arrTasks.remove(at: indexPath.row)
+            tableView.beginUpdates()
+            tableView.deleteRows(at: [indexPath], with: .middle)
+            tableView.endUpdates()
         }
+    }
     
     func addTaskAlert() {
         let alert = UIAlertController(title: "Add Task", message: "", preferredStyle: UIAlertController.Style.alert)
@@ -104,7 +113,8 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             if text.isEmpty {
                 
             } else {
-                ArrTasks.sharedInstance.createUser(text, activityID: "1")
+                ArrTasks.sharedInstance.createUser(text, activityID: self.activityID)
+                self.refreshView()
             }
         }
         
@@ -113,9 +123,7 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
         
         alert.addAction(action)
-        self.present(alert, animated:true, completion: {
-            self.refreshView()
-        })
+        self.present(alert, animated:true, completion: nil)
     }
 
 

@@ -31,7 +31,7 @@ class ArrUsers {
         let db = DatabaseOperation()
         db.openDatabase(true)
         
-        db.InsertUsersList(name, userID: imageName, image: imageName, createDate: "", updateDate: "", createby: "", updateby: "")
+        db.InsertUsersList(name, userID: imageName, image: imageName)
         
         db.closeDatabase()
     }
@@ -42,11 +42,7 @@ class ArrUsers {
     /// - Returns: array of users
     func getAllUsers() -> [ArrUsers] {
         
-        var user = ArrUsers()
         var arr = [ArrUsers]()
-        
-        user.image = "Add"
-        arr.append(user)
         
         let db = DatabaseOperation()
         db.openDatabase(false)
@@ -60,7 +56,7 @@ class ArrUsers {
         }
         
         while cursor.next() {
-            user = ArrUsers()
+            let user = ArrUsers()
             user.userID = cursor.stringValue(0)
             user.name = cursor.stringValue(1)
             user.image = cursor.stringValue(2)

@@ -38,6 +38,8 @@ class TaskCell: UITableViewCell {
             txtCounter.isHidden = false
             txtCounter.text = "\(counter)."
             txtTaskName.text =  task.name
+            imgStatus.image = UIImage(named: "Unchecked")
+            
             txtCounter.sizeToFit()
         }
     }

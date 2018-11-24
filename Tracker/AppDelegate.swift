@@ -20,6 +20,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         if let window = window {
             
+            let path = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+            
+            print(path)
+            
             let viewController: MainViewController = MainViewController(nibName: "MainViewController", bundle: nil)
             let navController = UINavigationController(rootViewController: viewController)
             window.rootViewController = navController

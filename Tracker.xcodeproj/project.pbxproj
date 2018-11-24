@@ -52,6 +52,7 @@
 		63AD897321A863A700A31F0D /* NSData+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 63AD897021A863A700A31F0D /* NSData+Base64.m */; };
 		63AD897421A863A700A31F0D /* FileManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD897121A863A700A31F0D /* FileManagement.swift */; };
 		63AD897821A889FB00A31F0D /* ArrTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD897721A889FB00A31F0D /* ArrTasks.swift */; };
+		829FF6FF21A91A1A00B9B165 /* ArrActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829FF6FE21A91A1A00B9B165 /* ArrActivity.swift */; };
 		82A3648E21A56D3E00788B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3648D21A56D3E00788B37 /* AppDelegate.swift */; };
 		82A3649521A56D4A00788B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A3649421A56D4A00788B37 /* Assets.xcassets */; };
 		82A3649821A56D4A00788B37 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 82A3649621A56D4A00788B37 /* LaunchScreen.storyboard */; };
@@ -135,6 +136,7 @@
 		63AD897721A889FB00A31F0D /* ArrTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrTasks.swift; sourceTree = "<group>"; };
 		70DA9B8F398B2FD022B5A237 /* Pods_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD19F56B68ABEA42516699 /* Pods-Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Tracker/Pods-Tracker.debug.xcconfig"; sourceTree = "<group>"; };
+		829FF6FE21A91A1A00B9B165 /* ArrActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrActivity.swift; sourceTree = "<group>"; };
 		82A3648A21A56D3E00788B37 /* Tracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		82A3648D21A56D3E00788B37 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		82A3649421A56D4A00788B37 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				63AD895E21A8184100A31F0D /* UserCell.swift */,
 				63AD895D21A8184100A31F0D /* UserCell.xib */,
 				63AD896621A8577900A31F0D /* ArrUsers.swift */,
+				829FF6FE21A91A1A00B9B165 /* ArrActivity.swift */,
 			);
 			path = AddActivity;
 			sourceTree = "<group>";
@@ -676,6 +679,7 @@
 				63AD896C21A8582300A31F0D /* AddUserVC.swift in Sources */,
 				63AD893A21A805DA00A31F0D /* MKTextField.swift in Sources */,
 				63AD895921A812A800A31F0D /* Locale.m in Sources */,
+				829FF6FF21A91A1A00B9B165 /* ArrActivity.swift in Sources */,
 				63AD893E21A80EBA00A31F0D /* CardView.swift in Sources */,
 				635668EA21A5EA9900F7CD42 /* UIColorExtension.swift in Sources */,
 			);

@@ -120,23 +120,45 @@ class AddActivityVC: UIViewController{
     
     // Navigation Operations
     @objc func cancelButtonClick() {
-        dismissView()
+        dismiss(animated: true, completion: nil)
     }
     
     @objc func doneButtonClick() {
-        dismissView()
+        dismiss(animated: true, completion: {
+            self.addActivity()
+        })
     }
     
-    private func dismissView() {
-        dismiss(animated: true, completion: nil)
-    }
+    
 
     
     private func refreshView() {
+        arrUsers = [ArrUsers]()
         arrUsers = ArrUsers.sharedInstance.getAllUsers()
         userCollectionView.reloadData()
     }
+    
+    func addActivity() {
+        
+        guard let title = txtActivityName.text else {
+            return
+        }
+        
+        guard let desc = txtActivityDiscription.text else {
+            return
+        }
+        
+        if title.isEmpty || desc.isEmpty {
+            
+        } else {
+            let dueDate = dueDatePicker.date
+            
+            ArrActivity.sharedInstance.createActivity(title, desc: desc, imageName: "", dueDate: "\(dueDate)")
+            
+        }
+    }
 
+    
     /*
     // MARK: - Navigation
 
@@ -184,6 +206,7 @@ extension AddActivityVC : UICollectionViewDelegate, UICollectionViewDataSource {
             }
         }
     }
+    
 }
 
 extension AddActivityVC : UITextFieldDelegate, UITextViewDelegate {

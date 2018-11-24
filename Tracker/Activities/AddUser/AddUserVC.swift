@@ -138,8 +138,8 @@ class AddUserVC: UIViewController {
         guard let userName = txtUserName.text  else {
             return
         }
-        
-        if userName.isEmpty || !isImageStored() {
+//        || !isImageStored()
+        if userName.isEmpty  {
             
         } else {
             ArrUsers.sharedInstance.createUser(userName, imageName: "\(imageName)")

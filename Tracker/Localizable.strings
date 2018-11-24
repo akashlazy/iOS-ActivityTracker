@@ -7,3 +7,22 @@
 */
 
 
+
+// Task
+"strAddTask" = "Add Task";
+
+
+// User
+"strAddUser" = "Add User";
+
+
+// Buttons
+"strDone" = "Done";
+
+"strCamera" = "Camera";
+"strGallary" = "Gallary";
+
+
+// Activity
+"strAddActivity" = "Add Activity";
+"strActivities" = "Activities";
