@@ -66,4 +66,13 @@ class ArrTasks {
         
         return arr
     }
+    
+    func deleteTask(_ arr: [ArrTasks], index: Int) {
+        let task = arr[index]
+        
+        let db = DatabaseOperation()
+        db.openDatabase(true)
+        
+        db.DeleteActivityTaskList(task.activityID)
+    }
 }

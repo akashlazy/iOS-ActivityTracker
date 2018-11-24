@@ -79,6 +79,19 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         }
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+        func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+            if editingStyle == .delete {
+                arrTasks.remove(at: indexPath.row)
+                tableView.beginUpdates()
+                tableView.deleteRows(at: [indexPath], with: .middle)
+                tableView.endUpdates()
+            }
+        }
+    
     func addTaskAlert() {
         let alert = UIAlertController(title: "Add Task", message: "", preferredStyle: UIAlertController.Style.alert)
         let action = UIAlertAction(title: "Done", style: .default) { (alertAction) in
