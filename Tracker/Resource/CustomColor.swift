@@ -31,6 +31,9 @@ class CustomColor: NSObject {
     class func background() -> UIColor {
         return UIColor(rgba: "#EAEAEA")
     }
+    class func lightBackground() -> UIColor {
+        return UIColor(rgba: "#F6F8FA")
+    }
     class func half_black() -> UIColor {
         return UIColor(rgba: "#808080")
     }

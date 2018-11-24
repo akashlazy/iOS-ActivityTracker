@@ -12,6 +12,8 @@ import FMDB
 
 class DatabaseOperation: DBInfo {
     
+    static let sharedInstance = DatabaseOperation()
+    
     override init() {
         super.init()
         
@@ -34,7 +36,7 @@ class DatabaseOperation: DBInfo {
                     }
                 }
             } else {
-                if database.open(withFlags: SQLITE_OPEN_READONLY) {
+                if !database.open(withFlags: 2) {
                     return
                 }
             }

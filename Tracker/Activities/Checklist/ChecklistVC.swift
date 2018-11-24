@@ -13,10 +13,16 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     @IBOutlet weak var txtCounter: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
-
-    var a = 5
     
     private let cellIdentifier = "TaskCell"
+    
+    private var arrTasks = [ArrTasks]()
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        
+        refreshView()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +31,13 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         
         tableView.delegate = self
         tableView.dataSource = self
+        
+        tableView.allowsMultipleSelection = true
+    }
+    
+    private func refreshView() {
+        arrTasks = ArrTasks.sharedInstance.getAllTasks("1")
+        tableView.reloadData()
     }
     
     func numberOfSections(in tableView: UITableView) -> Int {
@@ -32,7 +45,7 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return a
+        return arrTasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -43,27 +56,53 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             cell = tableView.dequeueReusableCell(withIdentifier: cellIdentifier) as? TaskCell
         }
         
-        if indexPath.row == 4 {
-            cell.imgStatus.image = UIImage(named: "Add")
-            cell.txtTaskName.text = "Add Task"
-            
-        } else {
-
-        }
+        cell.configureCell(arrTasks, index: indexPath.row)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if indexPath.row == 4 {
-            let addTask = AddTaskVC(nibName: "AddTaskVC", bundle: nil)
-            let nav = UINavigationController(rootViewController: addTask)
-            
-            self.present(nav, animated: true, completion: {
-                self.a = self.a + 1
-                tableView.reloadData()
-            })
+        if indexPath.row == arrTasks.count - 1 {
+            addTaskAlert()
+        } else {
+            let cell = tableView.cellForRow(at: indexPath) as! TaskCell
+            cell.imgStatus.image = UIImage(named: "Checked")
         }
+    }
+    
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        if indexPath.row == arrTasks.count - 1 {
+            addTaskAlert()
+        } else {
+            let cell = tableView.cellForRow(at: indexPath) as! TaskCell
+            cell.imgStatus.image = UIImage(named: "Unchecked")
+        }
+    }
+    
+    func addTaskAlert() {
+        let alert = UIAlertController(title: "Add Task", message: "", preferredStyle: UIAlertController.Style.alert)
+        let action = UIAlertAction(title: "Done", style: .default) { (alertAction) in
+            let textField = alert.textFields![0] as UITextField
+            
+            guard let text = textField.text else {
+                return
+            }
+            
+            if text.isEmpty {
+                
+            } else {
+                ArrTasks.sharedInstance.createUser(text, activityID: "1")
+            }
+        }
+        
+        alert.addTextField { (textField) in
+            textField.placeholder = "Enter Task Name"
+        }
+        
+        alert.addAction(action)
+        self.present(alert, animated:true, completion: {
+            self.refreshView()
+        })
     }
 
 

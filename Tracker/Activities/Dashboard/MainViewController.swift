@@ -11,6 +11,9 @@ import UIKit
 class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var hideView: UIView!
+    @IBOutlet weak var hideLabel: UILabel!
+    
     
     var a = 5
     
@@ -23,7 +26,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         self.title = "Activities"
         
-        self.tableView.backgroundColor = CustomColor.background()
+        self.view.backgroundColor = CustomColor.background()
         
         self.navigationController?.navigationBar.prefersLargeTitles = true
         navigationItem.largeTitleDisplayMode = .automatic
@@ -31,18 +34,32 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         let add = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addButtonClick))
         self.navigationItem.rightBarButtonItem = add
+        
+        hideLabel.textColor = CustomColor.dark_gray()
     }
     
     
     @objc func addButtonClick() {
         let addActivity = AddActivityVC(nibName: "AddActivityVC", bundle: nil)
+
         let nav = UINavigationController(rootViewController: addActivity)
         
         self.present(nav, animated: true, completion: {
             self.a -= 1
-            self.tableView.reloadData()
+            self.refreshList()
         })
 
+    }
+    
+    func refreshList() {
+        if a == 0 {
+            tableView.isHidden = true
+            hideView.isHidden = false
+        } else {
+            tableView.isHidden = false
+            hideView.isHidden = true
+            tableView.reloadData()
+        }
     }
     
     override func setEditing(_ editing: Bool, animated: Bool) {
@@ -104,4 +121,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     */
 
+}
+
+
+extension MainViewController {
+    func createUsers()  {
+        
+    }
 }
