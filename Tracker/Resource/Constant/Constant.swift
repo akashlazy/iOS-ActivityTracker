@@ -9,7 +9,7 @@ public struct Constant {
     struct Folder {
         static let mainFolderName = "Tracker/"
         static let folderUserImage = "UserImage/"
-        static let folderActivityImage = "UserImage/"
+        static let folderActivityImage = "ActivityImage/"
     }
     
     struct ImageExtension {

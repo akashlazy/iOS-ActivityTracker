@@ -1,10 +1,3 @@
-//
-//  DB.swift
-//  RigV
-//
-//  Created by Swapnil Jambhulkar on 11/01/17.
-//  Copyright © 2017 Akash. All rights reserved.
-//
 
 import Foundation
 import FMDB
@@ -30,9 +23,8 @@ class DBInfo {
             + Users_Tlb + " (" + dbID + " integer primary key autoincrement, "
             + dbUserID + " integer, " + dbUserName + " text, "
             + dbImageName + " text, " + dbCreateDate + " text, "
-            + dbUpdatedDate + " text, " + dbCreatedby + " text, "
-            + dbUpdatedby + " text, " + dbCreatedby
-            + " text " + " ); "
+            + dbUpdatedDate + " text, " + dbUpdatedby
+            + " text, " + dbCreatedby + " text " + " ); "
         
         sqlExecute(UsersListTableCreate)
     }
@@ -51,6 +43,7 @@ class DBInfo {
     let dbStartTime = "StartTime"
     let dbLastUpdate = "LastUpdate"
     let dbIsActivityStop = "IsActivityStop"
+    let dbIsActivitySwipe = "IsActivitySwipe"
     
     func ActivityListTableCreate(_ db: FMDatabase) {
         //prepare table creations query
@@ -59,7 +52,7 @@ class DBInfo {
             + dbActivityDescription + " text, " + dbActivityTitle + " text, "
             + dbImageName + " text, " + dbCreateDate + " text, "
             + dbLastUpdate + " text, " + dbDueDate + " text, "
-            + dbStartTime + " text, " + dbIsActivityStop
+            + dbStartTime + " text, " + dbIsActivityStop + " text, " + dbIsActivitySwipe
             + " text " + " ); "
         
         sqlExecute(ActivityListTableCreate)

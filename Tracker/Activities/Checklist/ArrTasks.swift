@@ -21,7 +21,7 @@ class ArrTasks {
     /// - Parameters:
     ///   - name: task Name
     ///   - activityID: activityID
-    func createUser(_ name: String, activityID: String) {
+    func createTask(_ name: String, activityID: String) {
         let db = DatabaseOperation()
         db.openDatabase(true)
         
@@ -45,9 +45,10 @@ class ArrTasks {
             + " from " + db.ActivityTaskTransaction_Tlb
             + " where " + db.dbActivityMasterID + " = " + activityID
             + " OR " + db.dbActivityMasterID + " = 0 "
-//            + "order by " + db.dbID
+            + "order by " + db.dbActivityMasterID + " desc"
         
         guard let cursor = db.selectRecords(sql) else {
+            db.closeDatabase()
             return arr
         }
         
@@ -66,6 +67,14 @@ class ArrTasks {
         return arr
     }
     
+    func selectTasks(_ status: String, ID: String) {
+        let db = DatabaseOperation()
+        db.openDatabase(true)
+        
+        db.UpdateActivityTaskList(status, ID: ID)
+        db.closeDatabase()
+    }
+    
     func deleteTask(_ ID: String) {
         
         let db = DatabaseOperation()
@@ -74,5 +83,27 @@ class ArrTasks {
         db.DeleteActivityTaskList(ID)
         
         db.closeDatabase()
+    }
+    
+    func getSelectCount(_ activityID: String) -> Int {
+        let db = DatabaseOperation()
+        db.openDatabase(false)
+        
+        let sql = "Select count(*)" + " from " + db.ActivityTaskTransaction_Tlb
+            + " Where " + db.dbActivityMasterID + " = " + activityID
+            + " And " + db.dbTaskStatus + " = 1"
+        
+        guard let cursor = db.selectRecords(sql) else {
+            db.closeDatabase()
+            return 0
+            
+        }
+        
+        var total = 0
+        if cursor.next() {
+            total = Int(cursor.int(forColumnIndex: 0))
+        }
+        
+        return total
     }
 }

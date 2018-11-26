@@ -51,14 +51,14 @@
                                                     <constraint firstAttribute="width" constant="40" id="gc2-XB-oD8"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Member_1" translatesAutoresizingMaskIntoConstraints="NO" id="rBz-Pm-JcI">
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Member_1" translatesAutoresizingMaskIntoConstraints="NO" id="rBz-Pm-JcI">
                                                 <rect key="frame" x="64" y="13" width="26" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="26" id="C1H-yP-Ig3"/>
                                                     <constraint firstAttribute="height" constant="26" id="RsU-Rj-gjd"/>
                                                 </constraints>
                                             </imageView>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Member_2" translatesAutoresizingMaskIntoConstraints="NO" id="tUo-sl-XnX">
+                                            <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Member_2" translatesAutoresizingMaskIntoConstraints="NO" id="tUo-sl-XnX">
                                                 <rect key="frame" x="82" y="13" width="26" height="26"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="26" id="K3h-WL-rCF"/>

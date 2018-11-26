@@ -11,17 +11,31 @@ import UIKit
 class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var txtCounter: UILabel!
+    @IBOutlet weak var txtActivityName: UILabel!
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var hrView: UIView!
+    
+    @IBOutlet weak var topHeight: NSLayoutConstraint!
     
     private let cellIdentifier = "TaskCell"
     
     private var arrTasks = [ArrTasks]()
     
     var activityID = ""
+    var activityName = ""
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        
+        self.title = "strTask".localized
+        
+        txtActivityName.text = activityName
+        
+        let height = UIApplication.shared.statusBarFrame.height +
+            self.navigationController!.navigationBar.frame.height
+        
+        topHeight.constant = height
         
         refreshView()
     }
@@ -35,6 +49,17 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         tableView.dataSource = self
         
         tableView.allowsMultipleSelection = true
+        
+        viewConfiguration()
+        
+        updateCounter(activityID)
+    }
+    
+    private func viewConfiguration() {
+        hrView.backgroundColor = CustomColor.light_gray()
+        
+        txtActivityName.textColor = CustomColor.darker_gray()
+        txtCounter.textColor = CustomColor.dark_gray()
     }
     
     private func refreshView() {
@@ -71,6 +96,11 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         } else {
             let cell = tableView.cellForRow(at: indexPath) as! TaskCell
             cell.imgStatus.image = UIImage(named: "Checked")
+            cell.txtTaskName.attributedText =  NSAttributedString().strikeThrough(arrTasks[indexPath.row].name)
+            
+            ArrTasks.sharedInstance.selectTasks("1", ID: arrTasks[indexPath.row].id)
+            updateCounter(activityID)
+            
         }
     }
     
@@ -80,6 +110,10 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         } else {
             let cell = tableView.cellForRow(at: indexPath) as! TaskCell
             cell.imgStatus.image = UIImage(named: "Unchecked")
+            cell.txtTaskName.attributedText =  NSAttributedString().plainText(arrTasks[indexPath.row].name)
+            ArrTasks.sharedInstance.selectTasks("0", ID: arrTasks[indexPath.row].id)
+            updateCounter(activityID)
+            
         }
     }
     
@@ -98,11 +132,12 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             tableView.beginUpdates()
             tableView.deleteRows(at: [indexPath], with: .middle)
             tableView.endUpdates()
+            refreshView()
         }
     }
     
     func addTaskAlert() {
-        let alert = UIAlertController(title: "Add Task", message: "", preferredStyle: UIAlertController.Style.alert)
+        let alert = UIAlertController(title: "strAddTask".localized, message: "", preferredStyle: UIAlertController.Style.alert)
         let action = UIAlertAction(title: "Done", style: .default) { (alertAction) in
             let textField = alert.textFields![0] as UITextField
             
@@ -113,7 +148,7 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
             if text.isEmpty {
                 
             } else {
-                ArrTasks.sharedInstance.createUser(text, activityID: self.activityID)
+                ArrTasks.sharedInstance.createTask(text, activityID: self.activityID)
                 self.refreshView()
             }
         }
@@ -126,6 +161,11 @@ class ChecklistVC: UIViewController, UITableViewDelegate, UITableViewDataSource 
         self.present(alert, animated:true, completion: nil)
     }
 
+    func updateCounter(_ activityID: String) {
+        let selectedTaskCount = "\(ArrTasks.sharedInstance.getSelectCount(activityID))"
+        
+        txtCounter.text = "(" + selectedTaskCount + "/" + "\(abs(arrTasks.count - 1))" + ")"
+    }
 
     /*
     // MARK: - Navigation

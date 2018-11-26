@@ -1,10 +1,3 @@
-//
-//  MainViewController.swift
-//  Tracker
-//
-//  Created by Dolphin on 21/11/18.
-//  Copyright © 2018 World. All rights reserved.
-//
 
 import UIKit
 
@@ -16,13 +9,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     private var arrActivity = [ArrActivity]()
     
+    private var isSwipe = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2, execute: {
-            self.refreshList()
-        })
+        
+        self.refreshList()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -48,14 +41,13 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         self.navigationItem.rightBarButtonItem = add
         
         hideLabel.textColor = CustomColor.dark_gray()
+        hideLabel.text = "strNoActivity".localized
     }
     
     
     @objc func addButtonClick() {
         let addActivity = AddActivityVC(nibName: "AddActivityVC", bundle: nil)
-
         let nav = UINavigationController(rootViewController: addActivity)
-        
         self.present(nav, animated: true, completion: nil)
     }
     
@@ -70,7 +62,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         } else {
             tableView.isHidden = false
             hideView.isHidden = true
-            tableView.reloadData()
+            
+            self.tableView.reloadData()
         }
     }
     
@@ -90,17 +83,32 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
             cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell") as? ActivityCell
         }
         
-        cell.configureCell(arrActivity, index: indexPath.row)
+        cell.configureCell(arrActivity, index: indexPath.row, classRef: self)
         
         return cell
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let checklistVC = ChecklistVC(nibName: "ChecklistVC", bundle: nil)
+        let activity = arrActivity[indexPath.row]
         
-        checklistVC.activityID = arrActivity[indexPath.row].id
-        
-        self.navigationController?.pushViewController(checklistVC, animated: true)
+        if activity.isSwipe.equals("1") {
+            
+            let addActivity = AddActivityVC(nibName: "AddActivityVC", bundle: nil)
+            let nav = UINavigationController(rootViewController: addActivity)
+
+            addActivity.activityID = activity.id
+            addActivity.activityName = activity.title
+            addActivity.imageName = activity.imageName
+            
+            self.present(nav, animated: true, completion: nil)
+        } else {
+            let checklistVC = ChecklistVC(nibName: "ChecklistVC", bundle: nil)
+    
+            checklistVC.activityID = activity.id
+            checklistVC.activityName = activity.title
+            
+            self.navigationController?.pushViewController(checklistVC, animated: true)
+        }
     }
     
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
@@ -121,5 +129,22 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 
 extension MainViewController {
+    func playButtonClick(_ activityID: String, isStatus: String, lastUpdate: String) {
+        ArrActivity.sharedInstance.startActivity(activityID, isStatus: isStatus, lastUpdate: lastUpdate)
+        refreshList()
+    }
     
+    func swipeAction(_ ID: String) {
+        ArrActivity.sharedInstance.swipeActivity(ID)
+        refreshList()
+    }
+    
+    func swipeReset() {
+        ArrActivity.sharedInstance.swipeReset()
+        
+//        DispatchQueue.main.async {
+            self.refreshList()
+//        }
+    }
+  
 }

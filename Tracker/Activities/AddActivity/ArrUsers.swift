@@ -31,7 +31,7 @@ class ArrUsers {
         let db = DatabaseOperation()
         db.openDatabase(true)
         
-        db.InsertUsersList(name, userID: imageName, image: imageName)
+        db.InsertUsersList(name, userID: name, image: imageName)
         
         db.closeDatabase()
     }
@@ -52,6 +52,7 @@ class ArrUsers {
             + " from " + db.Users_Tlb
         
         guard let cursor = db.selectRecords(sql) else {
+            db.closeDatabase()
             return arr
         }
         

@@ -10,6 +10,8 @@
 
 // Task
 "strAddTask" = "Add Task";
+"strTask" = "Select Tasks";
+"strTaskHint" = "Enter Task Name";
 
 
 // User
@@ -18,7 +20,9 @@
 
 // Buttons
 "strDone" = "Done";
+"strCancel" = "Cancel";
 
+"strChooseImg" = "Choose Image";
 "strCamera" = "Camera";
 "strGallary" = "Gallary";
 
@@ -26,3 +30,11 @@
 // Activity
 "strAddActivity" = "Add Activity";
 "strActivities" = "Activities";
+"strActNameHint" = "Enter Activity Name";
+"strDesp" = "Enter Description";
+"strDespHint" = "Enter details about activity";
+"strDueDate" = "Select Due Date";
+"strAssignUsers" = "Assign Users";
+"strNoActivity" = "No any activity create yet";
+
+

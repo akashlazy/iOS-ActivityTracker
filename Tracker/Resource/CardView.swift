@@ -1,10 +1,3 @@
-//
-//  CardView.swift
-//  Tracker
-//
-//  Created by Dolphin on 21/11/18.
-//  Copyright © 2018 World. All rights reserved.
-//
 
 import UIKit
 

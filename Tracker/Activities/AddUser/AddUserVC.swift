@@ -21,8 +21,8 @@ class AddUserVC: UIViewController {
     
     @IBOutlet weak var txtUserName: MKTextField!
     
-    private var image = UIImage()
-    private var imageName = 0
+    private var image: UIImage! = nil
+    var imageName = ""
     
     var imagePickedBlock: ((UIImage) -> Void)?
     
@@ -46,18 +46,18 @@ class AddUserVC: UIViewController {
     
     
     func showOptions() {
-        let optionMenu = UIAlertController(title: nil, message: "Choose Image", preferredStyle: .actionSheet)
+        let optionMenu = UIAlertController(title: nil, message: "strChooseImg".localized, preferredStyle: .actionSheet)
         
         // 2
-        let deleteAction = UIAlertAction(title: "Camera", style: .default) { (a) in
+        let deleteAction = UIAlertAction(title: "strCamera".localized, style: .default) { (a) in
             self.showCamera()
         }
-        let saveAction = UIAlertAction(title: "Gallery", style: .default) { (a) in
+        let saveAction = UIAlertAction(title: "strGallary".localized, style: .default) { (a) in
             self.showPhotoLibrary()
         }
        
         // 3
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        let cancelAction = UIAlertAction(title: "strCancel".localized, style: .cancel)
         
         // 4
         optionMenu.addAction(deleteAction)
@@ -67,32 +67,6 @@ class AddUserVC: UIViewController {
         // 5
         self.present(optionMenu, animated: true, completion: nil)
         
-    }
-    
-    
-    func isImageStored() -> Bool {
-        
-        imageName = Int.random(in: 0..<6)
-        
-        let mainPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
-        let str = Constant.Folder.mainFolderName + Constant.Folder.folderUserImage + "\(imageName)/" + Constant.ImageExtension.jpeg
-        guard let path = mainPath.appendingPathComponent(str) else {
-           return false
-        }
-        
-        FileManagement.createFolder(Constant.Folder.mainFolderName)
-        FileManagement.createFolder(Constant.Folder.mainFolderName + Constant.Folder.folderUserImage)
-        guard let imageData = self.image.jpegData(compressionQuality: 0.1) else {
-            return false
-        }
-        
-        do {
-            try imageData.write(to: path, options: .atomic)
-        } catch  {
-            return false
-        }
-        
-        return true
     }
     
     private func navigation() {
@@ -138,13 +112,18 @@ class AddUserVC: UIViewController {
         guard let userName = txtUserName.text  else {
             return
         }
-//        || !isImageStored()
-        if userName.isEmpty  {
-            
-        } else {
-            ArrUsers.sharedInstance.createUser(userName, imageName: "\(imageName)")
-            dismissView()
+        
+        if userName.isEmpty {
+            self.view.makeToast("User Name is Missing")
         }
+        
+        let mysharedPref = MySharedPreference()
+        
+        let counter = mysharedPref.getUserCounter()
+        isImageStored("\(counter)")
+        ArrUsers.sharedInstance.createUser("\(counter)", imageName: "\(counter)")
+        mysharedPref.setUserCounter(counter + 1)
+        dismissView()
     }
     
    
@@ -237,17 +216,38 @@ extension AddUserVC : UIImagePickerControllerDelegate, UINavigationControllerDel
     // Select Photo from Photo Library
     
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
+    @objc func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
         
-        if let image = editingInfo[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            self.image = image
-            self.imgUser.image = image
-        }
+        self.image = image
+        self.imgUser.image = image
+        
+        imagePickerControllerDidCancel(picker)
     }
 
     // Cancel Photo Library
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
         self.dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func isImageStored(_ imageName: String) {
+        
+        let mainPath = NSURL(fileURLWithPath: NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true)[0])
+        let str = Constant.Folder.mainFolderName + Constant.Folder.folderUserImage + "\(imageName)" + Constant.ImageExtension.jpeg
+        guard let path = mainPath.appendingPathComponent(str) else {
+            return
+        }
+        
+        FileManagement.createFolder(Constant.Folder.mainFolderName)
+        FileManagement.createFolder(Constant.Folder.mainFolderName + Constant.Folder.folderUserImage)
+        guard let imageData = self.image.jpegData(compressionQuality: 0.01) else {
+            return
+        }
+        
+        do {
+            try imageData.write(to: path, options: .atomic)
+        } catch  {
+            return
+        }
     }
     
 }

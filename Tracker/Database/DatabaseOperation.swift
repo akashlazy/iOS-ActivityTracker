@@ -1,10 +1,3 @@
-//
-//  DBOpr.swift
-//  RigV
-//
-//  Created by Swapnil Jambhulkar on 11/01/17.
-//  Copyright © 2017 Akash. All rights reserved.
-//
 
 import Foundation
 import SQLite3
@@ -54,29 +47,32 @@ class DatabaseOperation: DBInfo {
         ActivityTaskListTableCreate(database)
         ActivityLogListTableCreate(database)
         
-        InsertActiviryMasterList("iOS Developer", title: "Apple", image: "", dueDate: "")
-        InsertActiviryMasterList("Android Developer", title: "Google", image: "", dueDate: "")
-        InsertActiviryMasterList("Windows Developer", title: "Microsoft", image: "", dueDate: "")
-        
+//        InsertActiviryMasterList("iOS Developer", title: "Apple", image: "", dueDate: "")
+//        InsertActiviryMasterList("Android Developer", title: "Google", image: "", dueDate: "")
+//        InsertActiviryMasterList("Windows Developer", title: "Microsoft", image: "", dueDate: "")
+//        
         InsertActivityTaskList("Add Task", status: "0", activityMasterID: "0")
-        InsertActivityTaskList("Design", status: "1", activityMasterID: "1")
-        InsertActivityTaskList("Coding", status: "0", activityMasterID: "1")
-        InsertActivityTaskList("Testing", status: "0", activityMasterID: "2")
-        InsertActivityTaskList("Publish", status: "1", activityMasterID: "3")
-        
-        
+//        InsertActivityTaskList("Design", status: "1", activityMasterID: "1")
+//        InsertActivityTaskList("Coding", status: "0", activityMasterID: "1")
+//        InsertActivityTaskList("Testing", status: "0", activityMasterID: "2")
+//        InsertActivityTaskList("Publish", status: "1", activityMasterID: "3")
+//        
+//        
         InsertUsersList("", userID: "", image: "Add")
-        InsertUsersList("Akash", userID: "1", image: "")
-        InsertUsersList("Ashish", userID: "2", image: "")
-        InsertUsersList("Kunal", userID: "3", image: "")
+        let sharedPref = MySharedPreference()
+        sharedPref.setUserCounter(1)
         
-        
-        InsertActivityParticipentList("1", activityMasterID: "1")
-        InsertActivityParticipentList("2", activityMasterID: "1")
-        InsertActivityParticipentList("3", activityMasterID: "2")
-        InsertActivityParticipentList("1", activityMasterID: "2")
-        InsertActivityParticipentList("1", activityMasterID: "3")
-        
+//        InsertUsersList("Akash", userID: "1", image: "")
+//        InsertUsersList("Ashish", userID: "2", image: "")
+//        InsertUsersList("Kunal", userID: "3", image: "")
+//        
+//        
+//        InsertActivityParticipentList("1", activityMasterID: "1")
+//        InsertActivityParticipentList("2", activityMasterID: "1")
+//        InsertActivityParticipentList("3", activityMasterID: "2")
+//        InsertActivityParticipentList("1", activityMasterID: "2")
+//        InsertActivityParticipentList("1", activityMasterID: "3")
+//        
         
         let appPref = MySharedPreference()
         appPref.setISDBOperationCreated(true)
@@ -157,7 +153,7 @@ class DatabaseOperation: DBInfo {
         values.setValue(description, forKey: "1")
         values.setValue(title, forKey: "2")
         values.setValue(image, forKey: "3")
-        values.setValue("", forKey: "4")
+        values.setValue("\(ConvertionClass.currentTime())", forKey: "4")
         values.setValue(dueDate, forKey: "5")
         values.setValue("", forKey: "6")
         values.setValue("", forKey: "7")
@@ -165,20 +161,136 @@ class DatabaseOperation: DBInfo {
         
         insertExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values)
     }
-    func UpdateActivityMasterList(_ ID: String, description: String, title: String, image: String) {
+    func UpdateActivityMasterList(_ ID: String, description: String, title: String, image: String, dueDate: String) {
         
         let parameter = NSMutableDictionary()
         parameter.setValue(dbActivityDescription, forKey: "1")
         parameter.setValue(dbActivityTitle, forKey: "2")
         parameter.setValue(dbImageName, forKey: "3")
+        parameter.setValue(dbDueDate, forKey: "4")
         
         let values = NSMutableDictionary()
         values.setValue(description, forKey: "1")
         values.setValue(title, forKey: "2")
         values.setValue(image, forKey: "3")
+        values.setValue(dueDate, forKey: "4")
         
-        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " ='" + ID)
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
     }
+    
+    func UpdateActivityStart(_ ID: String, isStart: String) {
+        
+        UpdateActivityStopAll(isStart)
+        
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbIsActivityStop, forKey: "1")
+        
+        let values = NSMutableDictionary()
+        values.setValue(isStart, forKey: "1")
+        
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
+    }
+    
+    private func UpdateActivityStop(_ ID: String, isStop: String) {
+        
+        UpdateActivityStartAll(isStop)
+        
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbIsActivityStop, forKey: "1")
+        
+        let values = NSMutableDictionary()
+        values.setValue(isStop, forKey: "1")
+        
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
+    }
+    
+    private func UpdateActivityStartAll(_ isStart: String) {
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbIsActivityStop, forKey: "1")
+        
+        let values = NSMutableDictionary()
+        values.setValue("1", forKey: "1")
+        
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: "")
+    }
+    
+    func UpdateActivityStopAll(_ isStart: String) {
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbIsActivityStop, forKey: "1")
+        
+        let values = NSMutableDictionary()
+        values.setValue("0", forKey: "1")
+        
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: "")
+    }
+    
+    func UpdateActivityLastTime(_ ID: String, lastUpdate: String) {
+        
+        var stop = lastUpdate
+        
+        if stop.isEmpty {
+            stop = "\(ConvertionClass.currentTime())"
+            
+            
+        }
+        
+        print("StopTime===", ConvertionClass.conLongToDate(Double(stop)!))
+        
+        
+        
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbLastUpdate, forKey: "1")
+        
+        let values = NSMutableDictionary()
+        values.setValue(stop, forKey: "1")
+        
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
+    }
+    
+    func UpdateActivityStartTime(_ ID: String, startTime: String) {
+        
+        var start = startTime
+        
+        if start.isEmpty {
+            start = "\(ConvertionClass.currentTime())"
+        }
+        
+     
+        print("StartTime===", ConvertionClass.conLongToDate(Double(start)!))
+
+        
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbStartTime, forKey: "1")
+        
+        let values = NSMutableDictionary()
+        values.setValue(start, forKey: "1")
+        
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
+    }
+    
+    func UpdateSwipeActivity(_ ID: String) {
+        
+        ResetSwipeActivity()
+    
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbIsActivitySwipe, forKey: "1")
+        
+        let values = NSMutableDictionary()
+        values.setValue("1", forKey: "1")
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
+    }
+
+    
+    func ResetSwipeActivity() {
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbIsActivitySwipe, forKey: "1")
+        
+        let values = NSMutableDictionary()
+        values.setValue("0", forKey: "1")
+        
+        updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: "")
+    }
+    
     func DeleteActivityMasterList(_ ID: String) {
         
         let delete = "delete from " + ActivityMaster_Tlb + " WHERE \(dbID) = '\(ID)'"
@@ -204,11 +316,11 @@ class DatabaseOperation: DBInfo {
         
         insertExecuteBind(ActivityParticipent_Tlb, parameter: parameter, value: values)
     }
-//    func DeleteActivityMasterList(_ ID: String) {
-//
-//        let delete = "delete from " + ActivityMaster_Tlb + " WHERE \(dbID) = '\(ID)'"
-//        sqlExecute(delete)
-//    }
+    func DeleteActivityParticipentList(_ userID: String, activityID: String) {
+
+        let delete = "delete from " + ActivityParticipent_Tlb + " WHERE \(dbUserID) = '\(userID)'"
+        sqlExecute(delete)
+    }
     /////////// end ActivityParticipent
     
     //////////ActivityTask
@@ -227,19 +339,16 @@ class DatabaseOperation: DBInfo {
         insertExecuteBind(ActivityTaskTransaction_Tlb, parameter: parameter, value: values)
     }
     
-    func UpdateActivityTaskList(_ name: String, status: String, activityMasterID: String) {
+    func UpdateActivityTaskList(_ status: String, ID: String) {
         
         let parameter = NSMutableDictionary()
-        parameter.setValue(dbTaskName, forKey: "1")
-        parameter.setValue(dbTaskStatus, forKey: "2")
-        parameter.setValue(dbActivityMasterID, forKey: "3")
+        parameter.setValue(dbTaskStatus, forKey: "1")
+        
         
         let values = NSMutableDictionary()
-        values.setValue(name, forKey: "1")
-        values.setValue(status, forKey: "2")
-        values.setValue(activityMasterID, forKey: "3")
+        values.setValue(status, forKey: "1")
         
-        updateExecuteBind(ActivityTaskTransaction_Tlb, parameter: parameter, value: values, condition: dbActivityMasterID + " ='" + activityMasterID)
+        updateExecuteBind(ActivityTaskTransaction_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
     }
     
     func DeleteActivityTaskList(_ ID: String) {
