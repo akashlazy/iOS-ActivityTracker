@@ -26,6 +26,7 @@ class ActivityCell: UITableViewCell {
     @IBOutlet weak var btnStart: UIButton!
     
     var toogle: Bool = false
+    var isSwipe: Bool = false
     
     var classRef: AnyObject! = nil
     
@@ -101,98 +102,54 @@ class ActivityCell: UITableViewCell {
     }
     
     @objc func swipeAction() {
+        let activity = arrActivity[index]
+        let activityID = activity.id
         
+        swipeOn()
         if classRef.isKind(of: MainViewController.self) {
-            (classRef as! MainViewController).swipeAction(arrActivity[index].id)
+            (classRef as! MainViewController).handelSwipe(activityID, isSwipe: isSwipe, currentIndex: index)
         }
+        
+//        if isSwipe {
+//            isSwipe = true
+//            swipeOff()
+//        } else {
+//            isSwipe = false
+//            swipeOn()
+//        }
+    }
+    
+    func swipeOn() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.backView.frame = CGRect(x: -100, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
+        }, completion: nil)
+    }
+    
+    func swipeOff() {
+        UIView.animate(withDuration: 0.3, animations: {
+            self.backView.frame = CGRect(x: 10, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
+        }, completion: nil)
     }
     
     @objc func swipeRightAction() {
+        swipeOff()
+    }
+      
+    @IBAction func playButtonClick(_ sender: UIButton) {
+        let activity = arrActivity[sender.tag]
+        let activityID = activity.id
         
         if classRef.isKind(of: MainViewController.self) {
-            (classRef as! MainViewController).swipeReset()
+            (classRef as! MainViewController).playButtonClick(activityID, isStatus: toogle, startTime: startTime, stopTime: stopTime, logID: activity.logID, currentIndex: sender.tag)
         }
-    }
-    
-//        if self.backView.frame.origin.x < 40 {
-//
-//
-//        } else {
-//
-//        }
-    
-    
-    
-//    @objc func abc() {
-//        UIView.animate(withDuration: 0, animations: {
-//            self.backView.frame = CGRect(x: 10, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
-//        }, completion: nil)
-//    }
-//
-//    @objc func abc1() {
-//        UIView.animate(withDuration: 0, animations: {
-//            self.backView.frame = CGRect(x: 10, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
-//        }, completion: nil)
-//
-//        print("Click")
-//    }
-    
-    
-    @IBAction func playButtonClick(_ sender: UIButton) {
-        
-        let sharedPref = MySharedPreference()
-        
-        let activity = arrActivity[sender.tag]
-        
-        let activityID = activity.id
-        isStatus = activity.isActivityStop
-        
-        
-//        if isStatus.equals("1") {
-//            stopTimer()
-//            sharedPref.setActivityID(activity.id)
-//            sharedPref.setISStart(false)
-//            sharedPref.setIndex(index);
-        
-            
-            if classRef.isKind(of: MainViewController.self) {
-                (classRef as! MainViewController).playButtonClick(activityID, isStatus: toogle, startTime: startTime, stopTime: stopTime, logID: activity.logID, currentIndex: sender.tag)
-            }
-            
-//        } else {
-//
-//            sharedPref.setActivityID(activity.id)
-//            sharedPref.setISStart(true)
-//            sharedPref.setIndex(index)
-//
-//
-//            startTimer()
-//
-//            sender.setImage(UIImage(named: "Timer_2"), for: .normal)
-//            if classRef.isKind(of: MainViewController.self) {
-//                (classRef as! MainViewController).playButtonClick(activityID, isStatus: "1", startTime: startTime, stopTime: stopTime, logID: activity.logID)
-//            }
-//        }
+
     }
     
     
     @objc func updateTime() {
-        
+
         self.txtTime.text = timeString(time: timeInterval)
-        
         timeInterval += 1
-//        let fromDate =
-//
-//        let calendar = Calendar.current
-//        let components = Set<Calendar.Component>([.hour, .minute, .second])
-//        let differenceOfDate = calendar.dateComponents(in: components, from: <#T##Date#>)
-//
-//
-//        let hour = differenceOfDate.hour
-//        let minutes = differenceOfDate.minute
-//        let seconds = differenceOfDate.second
-//
-//        self.txtTime.text = "\(hour ?? 00):\(minutes ?? 00):\(seconds ?? 00)"
     }
 
     func startTimer() {
@@ -224,6 +181,7 @@ class ActivityCell: UITableViewCell {
         let activityID = activity.id
         startTime = activity.startTime
         stopTime = activity.lastUpdate
+        
         
         logID = activity.logID
         
@@ -299,18 +257,7 @@ class ActivityCell: UITableViewCell {
         } else {
             self.imgIcon.image = loadActivityImage(activity.imageName)
         }
-        
-        if activity.isSwipe.equals("1") {
-            self.backView.frame = CGRect(x: -100, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
-            
-//            UIView.animate(withDuration: 0, animations: {
-//                
-//            }, completion: nil)
-        } else {
-//            UIView.animate(withDuration: 0, animations: {
-                self.backView.frame = CGRect(x: 10, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
-//            }, completion: nil)
-        }
+
     }
     
     func loadActivityImage(_ getImage: String) -> UIImage? {
@@ -351,6 +298,7 @@ class ActivityCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+   
 }
 
 

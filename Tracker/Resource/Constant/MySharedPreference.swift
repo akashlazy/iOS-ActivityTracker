@@ -44,11 +44,15 @@ class MySharedPreference: NSObject {
     }
     
     
-    func getActivityID() -> String {
-        return objCommon.value(forKey: "ActivityID") as! String
+    func getActivityID() -> String! {
+        if objCommon.string(forKey: "ActivityID") == nil {
+            return ""
+        } else {
+            return objCommon.string(forKey: "ActivityID")
+        }
     }
     func setActivityID(_ text: String) {
-        objCommon.setValue(text, forKey: "ActivityID")
+        objCommon.set(text, forKey: "ActivityID")
         objCommon.synchronize()
     }
     
@@ -57,6 +61,27 @@ class MySharedPreference: NSObject {
     }
     func setIndex(_ text: Int) {
         objCommon.set(text, forKey: "Index")
+        objCommon.synchronize()
+    }
+    
+    func getSwipeID() -> String! {
+        if objCommon.string(forKey: "SwipeID") == nil {
+            return ""
+        } else {
+            return objCommon.string(forKey: "SwipeID")
+        }
+        
+    }
+    func setSwipeID(_ text: String) {
+        objCommon.set(text, forKey: "SwipeID")
+        objCommon.synchronize()
+    }
+    
+    func getSwipeIndex() -> Int {
+        return objCommon.integer(forKey: "SwipeIndex")
+    }
+    func setSwipeIndex(_ text: Int) {
+        objCommon.set(text, forKey: "SwipeIndex")
         objCommon.synchronize()
     }
    

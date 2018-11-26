@@ -177,24 +177,39 @@ extension MainViewController {
     }
     
     
-    func handelSwipe() {
+    func handelSwipe(_ swipeID: String ,isSwipe: Bool, currentIndex: Int) {
         
-    }
-    
-    
-    
-    
-    func swipeAction(_ ID: String) {
-        ArrActivity.sharedInstance.swipeActivity(ID)
-        refreshList()
-    }
-    
-    func swipeReset() {
-        ArrActivity.sharedInstance.swipeReset()
+        let appPref = MySharedPreference()
         
-//        DispatchQueue.main.async {
-            self.refreshList()
-//        }
+        if !appPref.getISSwipe() {
+            let indexPath = IndexPath(row: appPref.getIndex(), section: 0)
+            let cell = tableView.cellForRow(at: indexPath) as? ActivityCell
+            cell?.isSwipe = false
+            appPref.setISSwipe(false)
+            cell?.swipeOff()
+        }
+        
+        if isSwipe {
+            let indexPath = IndexPath(row: currentIndex, section: 0)
+            let cell = tableView.cellForRow(at: indexPath) as? ActivityCell
+
+            cell?.isSwipe = false
+
+            appPref.setSwipeIndex(currentIndex)
+            appPref.setSwipeID(swipeID)
+            appPref.setISSwipe(true)
+
+            cell?.swipeOff()
+        } else {
+            appPref.setSwipeIndex(currentIndex)
+            appPref.setSwipeID(swipeID)
+            appPref.setISSwipe(false)
+
+            let indexPath = IndexPath(row: currentIndex, section: 0)
+            let cell = tableView.cellForRow(at: indexPath) as? ActivityCell
+
+            cell?.swipeOn()
+            cell?.isSwipe = true
+        }
     }
-  
 }
