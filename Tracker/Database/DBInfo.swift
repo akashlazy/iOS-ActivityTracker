@@ -44,6 +44,7 @@ class DBInfo {
     let dbLastUpdate = "LastUpdate"
     let dbIsActivityStop = "IsActivityStop"
     let dbIsActivitySwipe = "IsActivitySwipe"
+    let dbActivityLogID = "ActivityLogID"
     
     func ActivityListTableCreate(_ db: FMDatabase) {
         //prepare table creations query
@@ -52,7 +53,8 @@ class DBInfo {
             + dbActivityDescription + " text, " + dbActivityTitle + " text, "
             + dbImageName + " text, " + dbCreateDate + " text, "
             + dbLastUpdate + " text, " + dbDueDate + " text, "
-            + dbStartTime + " text, " + dbIsActivityStop + " text, " + dbIsActivitySwipe
+            + dbStartTime + " text, " + dbIsActivityStop
+            + " text, " + dbIsActivitySwipe + " text, " + dbActivityLogID
             + " text " + " ); "
         
         sqlExecute(ActivityListTableCreate)
@@ -108,13 +110,15 @@ class DBInfo {
     ///////ActivityLog Table
     let ActivityLog_Tlb = "ActivityLog"
     let dbEndTime = "EndTime"
+    let dbTotalTime = "TotalTime"
     
     func ActivityLogListTableCreate(_ db: FMDatabase) {
         //prepare table creations query
         let ActivityLogListTableCreate = "create table "
             + ActivityLog_Tlb + " (" + dbID + " integer primary key autoincrement, "
-            + ActivityMaster_Tlb + " integer, " + dbStartTime + " text, "
-            + dbEndTime + " text " + " ); "
+            + dbActivityMasterID + " integer, " + dbStartTime + " text, "
+            + dbEndTime + " text, " + dbTotalTime + " text "
+            + " ); "
         
         sqlExecute(ActivityLogListTableCreate)
     }

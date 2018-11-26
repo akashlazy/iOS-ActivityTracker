@@ -129,10 +129,60 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 
 extension MainViewController {
-    func playButtonClick(_ activityID: String, isStatus: String, lastUpdate: String) {
-        ArrActivity.sharedInstance.startActivity(activityID, isStatus: isStatus, lastUpdate: lastUpdate)
-        refreshList()
+    func playButtonClick(_ activityID: String, isStatus: Bool, startTime: String, stopTime: String, logID: String, currentIndex: Int) {
+
+        let appPref = MySharedPreference()
+        if appPref.getISStart() == true && !activityID.equals(appPref.getActivityID()) {
+            let indexPath = IndexPath(row: appPref.getIndex(), section: 0)
+            let cell = tableView.cellForRow(at: indexPath) as? ActivityCell
+            
+            cell?.toogle = false
+            cell?.stopTimer()
+            cell?.btnStart.setImage(UIImage(named: "Timer_1"))
+            
+            ArrActivity.sharedInstance.stopActivity(appPref.getActivityID(), stopTime: cell!.stopTime, logID: cell!.logID)
+        }
+        
+        if !isStatus {
+            
+            let indexPath = IndexPath(row: currentIndex, section: 0)
+            let cell = tableView.cellForRow(at: indexPath) as? ActivityCell
+            
+            cell?.toogle = true
+            cell?.btnStart.setImage(UIImage(named: "Timer_2"))
+
+            appPref.setIndex(currentIndex)
+            appPref.setISStart(true)
+            appPref.setActivityID(activityID)
+            
+            cell?.startTimer()
+            cell?.logID =
+             ArrActivity.sharedInstance.startActivity(activityID, isStatus: "1", startTime: cell!.startTime)
+        } else {
+            
+            appPref.setIndex(currentIndex)
+            appPref.setISStart(false)
+            appPref.setActivityID(activityID)
+            
+            let indexPath = IndexPath(row: currentIndex, section: 0)
+            let cell = tableView.cellForRow(at: indexPath) as? ActivityCell
+            
+            cell?.stopTimer()
+            cell?.toogle = false
+            
+            cell?.btnStart.setImage(UIImage(named: "Timer_1"))
+            
+            ArrActivity.sharedInstance.stopActivity(activityID, stopTime: cell!.stopTime, logID: cell!.logID)
+        }
     }
+    
+    
+    func handelSwipe() {
+        
+    }
+    
+    
+    
     
     func swipeAction(_ ID: String) {
         ArrActivity.sharedInstance.swipeActivity(ID)

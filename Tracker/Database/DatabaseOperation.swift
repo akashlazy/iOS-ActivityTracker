@@ -148,6 +148,7 @@ class DatabaseOperation: DBInfo {
         parameter.setValue(dbStartTime, forKey: "6")
         parameter.setValue(dbLastUpdate, forKey: "7")
         parameter.setValue(dbIsActivityStop, forKey: "8")
+        parameter.setValue(dbActivityLogID, forKey: "9")
         
         let values = NSMutableDictionary()
         values.setValue(description, forKey: "1")
@@ -158,6 +159,8 @@ class DatabaseOperation: DBInfo {
         values.setValue("", forKey: "6")
         values.setValue("", forKey: "7")
         values.setValue("0", forKey: "8")
+        values.setValue("", forKey: "9")
+        
         
         insertExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values)
     }
@@ -178,15 +181,18 @@ class DatabaseOperation: DBInfo {
         updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
     }
     
-    func UpdateActivityStart(_ ID: String, isStart: String) {
+    func UpdateActivityStart(_ ID: String, isStart: String, logID: String) {
         
-        UpdateActivityStopAll(isStart)
+//        UpdateActivityStopAll(isStart)
         
         let parameter = NSMutableDictionary()
         parameter.setValue(dbIsActivityStop, forKey: "1")
+        parameter.setValue(dbActivityLogID, forKey: "2")
         
         let values = NSMutableDictionary()
         values.setValue(isStart, forKey: "1")
+        values.setValue(logID, forKey: "2")
+        
         
         updateExecuteBind(ActivityMaster_Tlb, parameter: parameter, value: values, condition: dbID + " = " + ID)
     }
@@ -229,12 +235,12 @@ class DatabaseOperation: DBInfo {
         var stop = lastUpdate
         
         if stop.isEmpty {
-            stop = "\(ConvertionClass.currentTime())"
+            stop = "\(Date())"
             
             
         }
         
-        print("StopTime===", ConvertionClass.conLongToDate(Double(stop)!))
+//        print("StopTime===", ConvertionClass.conLongToDate(Double(stop)!))
         
         
         
@@ -252,11 +258,11 @@ class DatabaseOperation: DBInfo {
         var start = startTime
         
         if start.isEmpty {
-            start = "\(ConvertionClass.currentTime())"
+            start = "\(Date())"
         }
         
      
-        print("StartTime===", ConvertionClass.conLongToDate(Double(start)!))
+//        print("StartTime===", ConvertionClass.conLongToDate(Double(start)!))
 
         
         let parameter = NSMutableDictionary()
@@ -359,19 +365,57 @@ class DatabaseOperation: DBInfo {
     /////////// end ActivityTask
     
     //////////ActivityLog
-    func InsertActivityLogist(_ activityMasterID: String, start: String, end: String) {
+    func InsertActivityLogist(_ activityMasterID: String, start: String) -> Int {
         
         let parameter = NSMutableDictionary()
         parameter.setValue(dbActivityMasterID, forKey: "1")
         parameter.setValue(dbStartTime, forKey: "2")
-        parameter.setValue(dbEndTime, forKey: "3")
+        parameter.setValue(dbTotalTime, forKey: "3")
         
         let values = NSMutableDictionary()
         values.setValue(activityMasterID, forKey: "1")
         values.setValue(start, forKey: "2")
-        values.setValue(end, forKey: "3")
+        values.setValue("0", forKey: "3")
         
         insertExecuteBind(ActivityLog_Tlb, parameter: parameter, value: values)
+        
+        return Int(database.lastInsertRowId)
+    }
+    
+    func UpdateActivityLogist(_ end: String, logID: String) {
+        
+        var stopTime = end
+        var startTime = ""
+        
+        let sql = "select " + dbStartTime + " from " + ActivityLog_Tlb
+        + " Where " + dbID + " = " + logID
+        
+        guard let cursor = selectRecords(sql) else {
+            return
+        }
+        
+        if cursor.next() {
+            startTime = cursor.stringValue(0)
+        }
+        
+        cursor.close()
+        
+        var totalTime = 0.0
+        
+      
+        if !stopTime.isEmpty {
+           totalTime = Double(stopTime)! - Double(startTime)!
+        }
+        
+        let parameter = NSMutableDictionary()
+        parameter.setValue(dbEndTime, forKey: "1")
+        parameter.setValue(dbTotalTime, forKey: "2")
+        
+        let values = NSMutableDictionary()
+        values.setValue(stopTime, forKey: "1")
+        values.setValue("\(totalTime)", forKey: "2")
+        
+        updateExecuteBind(ActivityLog_Tlb, parameter: parameter, value: values, condition: dbID + " = " + logID)
     }
     
     func UpdateActivityTaskList(_ activityMasterID: String, start: String, end: String) {

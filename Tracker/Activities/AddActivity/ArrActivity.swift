@@ -16,6 +16,8 @@ class ArrActivity {
     public var userImageName = ""
     public var totalTask = ""
     public var completedTask = ""
+    public var logID = ""
+    public var totalTime = ""
     
     public var isSwipe = ""
     
@@ -70,7 +72,10 @@ class ArrActivity {
             + ", amt." + db.dbActivityDescription + ", amt." + db.dbDueDate
             + ", amt." + db.dbIsActivityStop + ", amt." + db.dbLastUpdate
             + ", amt." + db.dbImageName + ", amt." + db.dbIsActivitySwipe
-            + ", amt." + db.dbStartTime
+            + ", amt." + db.dbStartTime + ", amt." + db.dbActivityLogID
+            
+            + ", (select sum(TotalTime) as TotalTime from ActivityLog where ActivityMasterID=amt.ID) as TotalTime"
+            
             + ", (SELECT group_concat(apt." + db.dbUserID + ", ',')"
             + " from " + db.ActivityParticipent_Tlb + " as apt"
             + " INNER JOIN " + db.Users_Tlb + " as umt on umt." + db.dbID
@@ -104,9 +109,12 @@ class ArrActivity {
             }
             
             activity.startTime = cursor.stringValue(8)
-            activity.userImageName = cursor.stringValue(9)
-            activity.totalTask = cursor.stringValue(10)
-            activity.completedTask = cursor.stringValue(11)
+            activity.logID = cursor.stringValue(9)
+            activity.totalTime = cursor.stringValue(10)
+            
+            activity.userImageName = cursor.stringValue(11)
+            activity.totalTask = cursor.stringValue(12)
+            activity.completedTask = cursor.stringValue(13)
             
             arr.append(activity)
         }
@@ -151,18 +159,26 @@ class ArrActivity {
         return arr
     }
     
-    func startActivity(_ activityID: String, isStatus: String, lastUpdate: String) {
+    func startActivity(_ activityID: String, isStatus: String, startTime: String) -> String {
         let db = DatabaseOperation()
         db.openDatabase(true)
        
-        if isStatus.equals("0") {
-            db.UpdateActivityStart(activityID, isStart: "0")
-            db.UpdateActivityLastTime(activityID, lastUpdate: lastUpdate)
-        } else {
-            db.UpdateActivityStart(activityID, isStart: "1")
-            db.UpdateActivityStartTime(activityID, startTime: lastUpdate)
-        }
+        let logID = db.InsertActivityLogist(activityID, start: startTime)
         
+        db.UpdateActivityStart(activityID, isStart: "1", logID: "\(logID)")
+        
+        db.closeDatabase()
+        
+        return "\(logID)"
+    }
+    
+    func stopActivity(_ activityID: String, stopTime: String, logID: String) {
+        let db = DatabaseOperation()
+        db.openDatabase(true)
+     
+        db.UpdateActivityLogist(stopTime, logID: logID)
+        
+        db.UpdateActivityStart(activityID, isStart: "0", logID: "\(logID)")
         db.closeDatabase()
     }
     

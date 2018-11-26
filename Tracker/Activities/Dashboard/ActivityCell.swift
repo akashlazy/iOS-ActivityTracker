@@ -25,7 +25,7 @@ class ActivityCell: UITableViewCell {
     @IBOutlet weak var txtTime: UILabel!
     @IBOutlet weak var btnStart: UIButton!
     
-    private var toogle: Bool = true
+    var toogle: Bool = false
     
     var classRef: AnyObject! = nil
     
@@ -33,11 +33,14 @@ class ActivityCell: UITableViewCell {
     
     private var timer: Timer? = nil
     
-    private var startTime = ""
-    private var stopTime = ""
+    var startTime = ""
+    var stopTime = ""
+    var logID = ""
     
     private var isStatus = ""
     private var index = 0
+    
+    private var timeInterval = 0.0
     
     var startDate = Date()
     
@@ -120,89 +123,90 @@ class ActivityCell: UITableViewCell {
     
     
     
-    @objc func abc() {
-        UIView.animate(withDuration: 0, animations: {
-            self.backView.frame = CGRect(x: 10, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
-        }, completion: nil)
-    }
-    
-    @objc func abc1() {
-        UIView.animate(withDuration: 0, animations: {
-            self.backView.frame = CGRect(x: 10, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
-        }, completion: nil)
-        
-        print("Click")
-    }
+//    @objc func abc() {
+//        UIView.animate(withDuration: 0, animations: {
+//            self.backView.frame = CGRect(x: 10, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
+//        }, completion: nil)
+//    }
+//
+//    @objc func abc1() {
+//        UIView.animate(withDuration: 0, animations: {
+//            self.backView.frame = CGRect(x: 10, y: self.backView.frame.origin.y, width: self.backView.frame.width, height: self.backView.frame.height)
+//        }, completion: nil)
+//
+//        print("Click")
+//    }
     
     
     @IBAction func playButtonClick(_ sender: UIButton) {
+        
+        let sharedPref = MySharedPreference()
         
         let activity = arrActivity[sender.tag]
         
         let activityID = activity.id
         isStatus = activity.isActivityStop
         
-        if isStatus.equals("1") {
-            stopTimer()
-            sender.setImage(UIImage(named: "Timer_1"))
+        
+//        if isStatus.equals("1") {
+//            stopTimer()
+//            sharedPref.setActivityID(activity.id)
+//            sharedPref.setISStart(false)
+//            sharedPref.setIndex(index);
+        
+            
             if classRef.isKind(of: MainViewController.self) {
-                (classRef as! MainViewController).playButtonClick(activityID, isStatus: "0",lastUpdate: stopTime)
+                (classRef as! MainViewController).playButtonClick(activityID, isStatus: toogle, startTime: startTime, stopTime: stopTime, logID: activity.logID, currentIndex: sender.tag)
             }
             
-        } else {
-            startTimer()
-            sender.setImage(UIImage(named: "Timer_2"), for: .normal)
-            if classRef.isKind(of: MainViewController.self) {
-                (classRef as! MainViewController).playButtonClick(activityID, isStatus: "1", lastUpdate: startTime)
-            }
-        }
+//        } else {
+//
+//            sharedPref.setActivityID(activity.id)
+//            sharedPref.setISStart(true)
+//            sharedPref.setIndex(index)
+//
+//
+//            startTimer()
+//
+//            sender.setImage(UIImage(named: "Timer_2"), for: .normal)
+//            if classRef.isKind(of: MainViewController.self) {
+//                (classRef as! MainViewController).playButtonClick(activityID, isStatus: "1", startTime: startTime, stopTime: stopTime, logID: activity.logID)
+//            }
+//        }
     }
     
     
     @objc func updateTime() {
         
-        var diff = 0.0
-        if !startTime.isEmpty && !stopTime.isEmpty  {
-            diff = abs(Double(stopTime)! - Double(startTime)!)
-            
-
-        } else {
-
-        }
+        self.txtTime.text = timeString(time: timeInterval)
+        
+        timeInterval += 1
+//        let fromDate =
 //
-        let calendar = Calendar.current
-        let components = Set<Calendar.Component>([.hour, .minute, .second])
-        let differenceOfDate = calendar.dateComponents(components, from: startDate, to: Date())
-        
-        let hour = differenceOfDate.hour
-        let minutes = differenceOfDate.minute
-        let seconds = differenceOfDate.second
-        
-        self.txtTime.text = "\(hour ?? 00):\(minutes ?? 00):\(seconds ?? 00)"
+//        let calendar = Calendar.current
+//        let components = Set<Calendar.Component>([.hour, .minute, .second])
+//        let differenceOfDate = calendar.dateComponents(in: components, from: <#T##Date#>)
+//
+//
+//        let hour = differenceOfDate.hour
+//        let minutes = differenceOfDate.minute
+//        let seconds = differenceOfDate.second
+//
+//        self.txtTime.text = "\(hour ?? 00):\(minutes ?? 00):\(seconds ?? 00)"
     }
 
     func startTimer() {
+        startTime = "\(ConvertionClass.currentTime())"
         
-        
-        let calendar = Calendar.current
-        let components = Set<Calendar.Component>([.hour, .minute, .second])
-        let differenceOfDate = calendar.dateComponents(components, from: startDate, to: Date())
-        
-        startDate = startDate.adding(time: differenceOfDate.second!)
-        
-        
-        if !startTime.isEmpty && !stopTime.isEmpty  {
-            
-//            let diff =  abs(Double(stopTime)! - Double(startTime)!)
-//            let updateDate = ConvertionClass.currentTime() + diff
-//             startTime =  "\(updateDate)"
-        }
-        
-        
+        guard timer == nil else { return }
+        timer = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(updateTime), userInfo: nil, repeats: true)
         guard timer == nil else { return }
     }
     
     func stopTimer() {
+        self.txtTime.text = timeString(time: timeInterval)
+        
+        stopTime = "\(ConvertionClass.currentTime())"
         guard timer != nil else { return }
         timer?.invalidate()
         timer = nil
@@ -221,20 +225,13 @@ class ActivityCell: UITableViewCell {
         startTime = activity.startTime
         stopTime = activity.lastUpdate
         
+        logID = activity.logID
         
-        ////
-        
-        if !startTime.isEmpty && !stopTime.isEmpty {
-            let diff = Double(startTime)! - Double(stopTime)!
-            
-            print("Diff", timeString(time: diff))
+        if !activity.totalTime.isEmpty {
+            timeInterval = Double(activity.totalTime)!
         }
         
-    
-        
-        ///////
-
-        
+            
         self.txtTitle.text = activity.title
         self.txtSubTitle.text = activity.description
         
