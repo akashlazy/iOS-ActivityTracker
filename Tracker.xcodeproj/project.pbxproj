@@ -47,8 +47,8 @@
 		63AD896E21A85D4700A31F0D /* Toast.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD896D21A85D4700A31F0D /* Toast.swift */; };
 		63AD897421A863A700A31F0D /* FileManagement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD897121A863A700A31F0D /* FileManagement.swift */; };
 		63AD897821A889FB00A31F0D /* ArrTasks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD897721A889FB00A31F0D /* ArrTasks.swift */; };
-		63AD897B21A9BDD300A31F0D /* ConvertionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD897A21A9BDD300A31F0D /* ConvertionClass.swift */; };
 		63AD897D21AB00B600A31F0D /* ArrAssignUsers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD897C21AB00B600A31F0D /* ArrAssignUsers.swift */; };
+		63AD898021ABAEED00A31F0D /* ConvertionClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63AD897F21ABAEED00A31F0D /* ConvertionClass.swift */; };
 		829FF6FF21A91A1A00B9B165 /* ArrActivity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 829FF6FE21A91A1A00B9B165 /* ArrActivity.swift */; };
 		82A3648E21A56D3E00788B37 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 82A3648D21A56D3E00788B37 /* AppDelegate.swift */; };
 		82A3649521A56D4A00788B37 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 82A3649421A56D4A00788B37 /* Assets.xcassets */; };
@@ -125,8 +125,8 @@
 		63AD896D21A85D4700A31F0D /* Toast.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Toast.swift; sourceTree = "<group>"; };
 		63AD897121A863A700A31F0D /* FileManagement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FileManagement.swift; sourceTree = "<group>"; };
 		63AD897721A889FB00A31F0D /* ArrTasks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrTasks.swift; sourceTree = "<group>"; };
-		63AD897A21A9BDD300A31F0D /* ConvertionClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertionClass.swift; sourceTree = "<group>"; };
 		63AD897C21AB00B600A31F0D /* ArrAssignUsers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrAssignUsers.swift; sourceTree = "<group>"; };
+		63AD897F21ABAEED00A31F0D /* ConvertionClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConvertionClass.swift; sourceTree = "<group>"; };
 		70DA9B8F398B2FD022B5A237 /* Pods_Tracker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tracker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		79DD19F56B68ABEA42516699 /* Pods-Tracker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tracker.debug.xcconfig"; path = "Target Support Files/Pods-Tracker/Pods-Tracker.debug.xcconfig"; sourceTree = "<group>"; };
 		829FF6FE21A91A1A00B9B165 /* ArrActivity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArrActivity.swift; sourceTree = "<group>"; };
@@ -203,7 +203,7 @@
 		635668E621A5D65100F7CD42 /* Resource */ = {
 			isa = PBXGroup;
 			children = (
-				63AD897921A9BDD300A31F0D /* Convertion Class */,
+				63AD897E21ABAEED00A31F0D /* Convertion Class */,
 				63AD894F21A812A800A31F0D /* Localization String */,
 				63AD893621A805DA00A31F0D /* MKTextField */,
 				63AD892F21A8051600A31F0D /* Keyboard */,
@@ -344,10 +344,10 @@
 			path = "File Management";
 			sourceTree = "<group>";
 		};
-		63AD897921A9BDD300A31F0D /* Convertion Class */ = {
+		63AD897E21ABAEED00A31F0D /* Convertion Class */ = {
 			isa = PBXGroup;
 			children = (
-				63AD897A21A9BDD300A31F0D /* ConvertionClass.swift */,
+				63AD897F21ABAEED00A31F0D /* ConvertionClass.swift */,
 			);
 			path = "Convertion Class";
 			sourceTree = "<group>";
@@ -657,12 +657,12 @@
 				63AD896E21A85D4700A31F0D /* Toast.swift in Sources */,
 				635668E921A5EA9900F7CD42 /* CustomColor.swift in Sources */,
 				63AD88F721A7EA4D00A31F0D /* Extension.swift in Sources */,
+				63AD898021ABAEED00A31F0D /* ConvertionClass.swift in Sources */,
 				63AD895821A812A800A31F0D /* LanguageManager.m in Sources */,
 				63AD88F321A7EA3200A31F0D /* AddTaskVC.swift in Sources */,
 				63AD893C21A805DA00A31F0D /* MKLayer.swift in Sources */,
 				63AD88F221A7EA3200A31F0D /* MainViewController.swift in Sources */,
 				63AD88F021A7EA3200A31F0D /* ActivityCell.swift in Sources */,
-				63AD897B21A9BDD300A31F0D /* ConvertionClass.swift in Sources */,
 				63AD896721A8577900A31F0D /* ArrUsers.swift in Sources */,
 				63AD88EA21A7EA3200A31F0D /* TaskCell.swift in Sources */,
 				63AD895A21A812A800A31F0D /* Localization.swift in Sources */,
