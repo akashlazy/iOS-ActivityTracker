@@ -181,7 +181,7 @@ extension MainViewController {
         
         let appPref = MySharedPreference()
         
-        if !appPref.getISSwipe() {
+        if appPref.getISSwipe() {
             let indexPath = IndexPath(row: appPref.getIndex(), section: 0)
             let cell = tableView.cellForRow(at: indexPath) as? ActivityCell
             cell?.isSwipe = false
@@ -197,13 +197,13 @@ extension MainViewController {
 
             appPref.setSwipeIndex(currentIndex)
             appPref.setSwipeID(swipeID)
-            appPref.setISSwipe(true)
+            appPref.setISSwipe(false)
 
             cell?.swipeOff()
         } else {
             appPref.setSwipeIndex(currentIndex)
             appPref.setSwipeID(swipeID)
-            appPref.setISSwipe(false)
+            appPref.setISSwipe(true)
 
             let indexPath = IndexPath(row: currentIndex, section: 0)
             let cell = tableView.cellForRow(at: indexPath) as? ActivityCell

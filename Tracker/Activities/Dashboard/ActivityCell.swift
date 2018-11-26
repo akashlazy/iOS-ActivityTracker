@@ -105,7 +105,6 @@ class ActivityCell: UITableViewCell {
         let activity = arrActivity[index]
         let activityID = activity.id
         
-        swipeOn()
         if classRef.isKind(of: MainViewController.self) {
             (classRef as! MainViewController).handelSwipe(activityID, isSwipe: isSwipe, currentIndex: index)
         }
